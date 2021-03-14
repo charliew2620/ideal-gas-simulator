@@ -41,18 +41,21 @@ class GasContainer {
    * This variable is just for the purposes of demonstrating how to make a shape move
    * across a screen. Please remove it once you start working on your code.
    */
-  const int top_side_ = kWindowSize - kMargin;
+  const int bottom_side_ = kWindowSize - kMargin;
   const int left_side_ = kMargin;
   const int right_side_ = kWindowSize - kMargin;
-  const int bottom_side_ = kMargin;
+  const int top_side_ = kMargin;
+  const double max_velocity_ = 1.0;
+  const double min_velocity_ = -1.0;
 
-      std::vector<Particle> particles_;
+  std::vector<Particle> particles_;
 
   void CalculateCollisionWithWall(Particle& particle) const;
 
   void CalculateCollisionWithParticle(Particle& particle);
 
   vec2 GiveRandomPosition();
+  vec2 GiveRandomVelocity();
 
 };
 

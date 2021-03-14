@@ -42,12 +42,12 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
     particle.NegateXVelocity();
   }
   // Checks top wall
-  if (particle.GetPosition().y >= top_side_ - particle.GetRadius() &&
+  if (particle.GetPosition().y >= bottom_side_ - particle.GetRadius() &&
       particle.GetVelocity().y > 0) {
     particle.NegateYVelocity();
   }
   // Checks top wall
-  if (particle.GetPosition().y  - particle.GetRadius() <= bottom_side_ &&
+  if (particle.GetPosition().y  - particle.GetRadius() <= top_side_ &&
       particle.GetVelocity().y < 0) {
     particle.NegateYVelocity();
   }
@@ -58,11 +58,18 @@ void GasContainer::PopulateContainer(const std::string& color, size_t total,
                                      double radius) {
   for (size_t particle = 0; particle < total; particle++) {
     particles_.emplace_back(GiveRandomPosition(),
-                            glm::vec2(1), color, radius);
+                            glm::vec2(GiveRandomVelocity()), color, radius);
   }
 }
 vec2 GasContainer::GiveRandomPosition() {
   return vec2(rand() % 634 + 58,rand() % 634 + 58);
+}
+vec2 GasContainer::GiveRandomVelocity() {
+  double x_velocity = (max_velocity_ - min_velocity_) *
+                          ( (double)rand() / (double)RAND_MAX ) + min_velocity_;
+  double y_velocity = sqrt(pow(max_velocity_, 2)
+                           - pow(x_velocity, 2));
+  return vec2(x_velocity, y_velocity);
 }
 
 }  // namespace idealgas
