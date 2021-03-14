@@ -22,6 +22,7 @@ void GasContainer::Display() const {
 }
 
 void GasContainer::AdvanceOneFrame() {
+  CalculateCollisionWithParticle();
   for (Particle& particle : particles_) {
     CalculateCollisionWithWall(particle);
     particle.UpdateParticle();
@@ -52,8 +53,26 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
     particle.NegateYVelocity();
   }
 }
-void GasContainer::CalculateCollisionWithParticle(Particle& particle) {
+void GasContainer::CalculateCollisionWithParticle() {
+  for (int i = 0; i < particles_)
+  for (int j = 0; j < particles_.size(); j++) {
+    if (&particle != &particles_[j] && particle.canCollideWithParticle(particles_[j])) {
+      vec2 particle_velocity = ChangeVelocity(particle, particles_[j]);
+      vec2 other_velocity = ChangeVelocity(particles_[j], particle);
+      particle.SetNewVelocity(particle_velocity);
+      particles_[j].SetNewVelocity(other_velocity);
+    }
+  }
 }
+
+vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
+  vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
+  vec2 position_difference = particle.GetPosition() - other.GetPosition();
+  float length = glm::length(position_difference);
+  return particle.GetVelocity() - (((velocity_difference) * (position_difference))
+  / pow(length, 2) * position_difference);
+}
+
 void GasContainer::PopulateContainer(const std::string& color, size_t total,
                                      double radius) {
   for (size_t particle = 0; particle < total; particle++) {
@@ -65,6 +84,7 @@ vec2 GasContainer::GiveRandomPosition() {
   return vec2(rand() % 634 + 58,rand() % 634 + 58);
 }
 vec2 GasContainer::GiveRandomVelocity() {
+  //https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
   double x_velocity = (max_velocity_ - min_velocity_) *
                           ( (double)rand() / (double)RAND_MAX ) + min_velocity_;
   double y_velocity = sqrt(pow(max_velocity_, 2)

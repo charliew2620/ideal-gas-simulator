@@ -52,7 +52,9 @@ class GasContainer {
 
   void CalculateCollisionWithWall(Particle& particle) const;
 
-  void CalculateCollisionWithParticle(Particle& particle);
+  void CalculateCollisionWithParticle();
+
+  vec2 ChangeVelocity(Particle& particle, Particle& other);
 
   vec2 GiveRandomPosition();
   vec2 GiveRandomVelocity();

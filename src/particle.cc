@@ -50,12 +50,18 @@ void Particle::Draw() {
   ci::gl::color(ci::Color(color_.c_str()));
   ci::gl::drawSolidCircle(vec2(position_), static_cast<float>(radius_));
 }
-//bool Particle::canCollideWithParticle(const Particle& other_particle) {
-//  if (glm::distance(this->position_, other_particle.position_) <
-//      this->radius_ + other_particle.radius_) {
-//    return glm::dot(this->position_ - other_particle.position_,
-//               this->velocity_ - other_particle.velocity_) < 0;
-//  }
-//}
+
+
+bool Particle::canCollideWithParticle(const Particle& other_particle) {
+  if (glm::distance(this->position_, other_particle.position_) <
+      this->radius_ + other_particle.radius_) {
+    return glm::dot(this->position_ - other_particle.position_,
+               this->velocity_ - other_particle.velocity_) < 0;
+  }
+  return false;
+}
+void Particle::SetNewVelocity(const glm::vec2& velocity) {
+  velocity_ = velocity;
+}
 
 }
