@@ -1,9 +1,10 @@
 #include "gas_simulation_app.h"
+#include <gas_container.h>
 
 namespace idealgas {
 
 IdealGasApp::IdealGasApp() {
-  ci::app::setWindowSize(kWindowSize, kWindowSize);
+  ci::app::setWindowSize(GasContainer::kWindowSize, GasContainer::kWindowSize);
 }
 
 void IdealGasApp::draw() {

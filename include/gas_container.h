@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "particle.h"
 
 using glm::vec2;
 
@@ -28,6 +29,10 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  const std::vector<Particle> &GetParticles() const;
+
+  static const int kWindowSize = 800;
+  const int kMargin = 108;
  private:
   /**
    * This variable is just for the purposes of demonstrating how to make a shape move
@@ -35,6 +40,17 @@ class GasContainer {
    */
   int x_position_ = 0;
   int y_position_ = 0;
+  const int top_side_ = kWindowSize - kMargin;
+  const int left_side_ = kMargin;
+  const int right_side_ = kWindowSize - kMargin;
+  const int bottom_side_ = kMargin;
+
+      std::vector<Particle> particles_;
+
+  void CalculateCollisionWithWall(Particle& particle) const;
+
+  void CalculateCollisionWithParticle(Particle& particle);
+
 };
 
 }  // namespace idealgas
