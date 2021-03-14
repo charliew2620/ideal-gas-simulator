@@ -41,8 +41,6 @@ class GasContainer {
    * This variable is just for the purposes of demonstrating how to make a shape move
    * across a screen. Please remove it once you start working on your code.
    */
-  int x_position_ = 0;
-  int y_position_ = 0;
   const int top_side_ = kWindowSize - kMargin;
   const int left_side_ = kMargin;
   const int right_side_ = kWindowSize - kMargin;
@@ -53,6 +51,8 @@ class GasContainer {
   void CalculateCollisionWithWall(Particle& particle) const;
 
   void CalculateCollisionWithParticle(Particle& particle);
+
+  vec2 GiveRandomPosition();
 
 };
 

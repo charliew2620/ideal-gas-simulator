@@ -43,8 +43,15 @@ void Particle::NegateYVelocity() {
 }
 
 void Particle::Draw() {
+//  if (!is_initialized_) {
+//    GiveRandomPosition();
+//    is_initialized_ = true;
+//  }
   ci::gl::color(ci::Color(color_.c_str()));
-  ci::gl::drawSolidCircle(vec2(position_), 10);
+  ci::gl::drawSolidCircle(vec2(position_), static_cast<float>(radius_));
+}
+void Particle::GiveRandomPosition() {
+  position_ = vec2(rand() % 634 + 58,rand() % 634 + 58);
 }
 //bool Particle::canCollideWithParticle(const Particle& other_particle) {
 //  if (glm::distance(this->position_, other_particle.position_) <

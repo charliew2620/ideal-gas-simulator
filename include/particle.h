@@ -9,9 +9,6 @@ class Particle {
 
  public:
 
-  const std::string particle_color = "orange";
-  const float particle_radius = 10;
-
   Particle(const glm::vec2& position, const glm::vec2& velocity, const std::string color, const double radius);
 
   void Draw();
@@ -19,6 +16,7 @@ class Particle {
   bool canCollideWithParticle(const Particle& other_particle);
   void NegateXVelocity();
   void NegateYVelocity();
+  void GiveRandomPosition();
 
 
 
@@ -33,6 +31,7 @@ class Particle {
   glm::vec2  velocity_;
   std::string color_;
   double radius_;
+  bool is_initialized_ = false;
 
 
 };
