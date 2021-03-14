@@ -36,7 +36,7 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
       particle.GetVelocity().x < 0) {
     particle.NegateXVelocity();
   }
-  // Checks right wall
+  // Checks bottom wall
   if (particle.GetPosition().x + particle.GetRadius() >= right_side_ &&
       particle.GetVelocity().x > 0) {
     particle.NegateXVelocity();
@@ -46,8 +46,8 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
       particle.GetVelocity().y > 0) {
     particle.NegateYVelocity();
   }
-  // Checks bottom wall
-  if (particle.GetPosition().y  + particle.GetRadius() <= bottom_side_ &&
+  // Checks top wall
+  if (particle.GetPosition().y  - particle.GetRadius() <= bottom_side_ &&
       particle.GetVelocity().y < 0) {
     particle.NegateYVelocity();
   }

@@ -16,9 +16,6 @@ class Particle {
   bool canCollideWithParticle(const Particle& other_particle);
   void NegateXVelocity();
   void NegateYVelocity();
-  void GiveRandomPosition();
-
-
 
   const glm::vec2 &GetPosition() const;
   const glm::vec2 &GetVelocity() const;
@@ -31,7 +28,6 @@ class Particle {
   glm::vec2  velocity_;
   std::string color_;
   double radius_;
-  bool is_initialized_ = false;
 
 
 };
