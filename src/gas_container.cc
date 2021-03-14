@@ -18,9 +18,10 @@ void GasContainer::Display() const {
 }
 
 void GasContainer::AdvanceOneFrame() {
-//  for (int particle = 0; particle < particles_.size(); particle++) {
-//    Particle &p1 = particles_[particle];
-//  }
+  for (Particle& particle : particles_) {
+    CalculateCollisionWithWall(particle);
+    particle.UpdateParticle();
+  }
   ++x_position_;
   ++y_position_;
 }
@@ -50,6 +51,13 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   }
 }
 void GasContainer::CalculateCollisionWithParticle(Particle& particle) {
+}
+void GasContainer::PopulateContainer(const std::string& color, size_t total,
+                                     double radius) {
+  for (size_t particle = 0; particle < total; particle++) {
+    particles_.emplace_back(glm::vec2(1, 1),
+                            glm::vec2(1, 1), color, radius);
+  }
 }
 
 }  // namespace idealgas

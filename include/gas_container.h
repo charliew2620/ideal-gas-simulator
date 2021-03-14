@@ -29,10 +29,13 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  void PopulateContainer(const std::string& color, size_t number, double radius);
+
   const std::vector<Particle> &GetParticles() const;
 
   static const int kWindowSize = 800;
   const int kMargin = 108;
+
  private:
   /**
    * This variable is just for the purposes of demonstrating how to make a shape move

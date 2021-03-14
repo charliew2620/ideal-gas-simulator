@@ -7,6 +7,10 @@ IdealGasApp::IdealGasApp() {
   ci::app::setWindowSize(GasContainer::kWindowSize, GasContainer::kWindowSize);
 }
 
+void IdealGasApp::create() {
+  container_.PopulateContainer(kColor, kNumber, kRadius);
+}
+
 void IdealGasApp::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
@@ -17,5 +21,6 @@ void IdealGasApp::draw() {
 void IdealGasApp::update() {
   container_.AdvanceOneFrame();
 }
+
 
 }  // namespace idealgas

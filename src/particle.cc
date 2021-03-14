@@ -44,8 +44,12 @@ void Particle::NegateYVelocity() {
 
 void Particle::Draw() {
 }
-bool Particle::canCollideWithParticle(const Particle& other_particle) {
-  return false;
-}
+//bool Particle::canCollideWithParticle(const Particle& other_particle) {
+//  if (glm::distance(this->position_, other_particle.position_) <
+//      this->radius_ + other_particle.radius_) {
+//    return glm::dot(this->position_ - other_particle.position_,
+//               this->velocity_ - other_particle.velocity_) < 0;
+//  }
+//}
 
 }

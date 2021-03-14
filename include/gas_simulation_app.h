@@ -16,6 +16,7 @@ class IdealGasApp : public ci::app::App {
 
   void draw() override;
   void update() override;
+  void create();
 
   // provided that you can see the entire UI on your screen.
   const int kWindowSize = 875;
@@ -23,6 +24,10 @@ class IdealGasApp : public ci::app::App {
 
  private:
   GasContainer container_;
+
+  const std::string kColor = "orange";
+  const static size_t  kNumber = 10;
+  constexpr const static double kRadius = 10;
 };
 
 }  // namespace idealgas
