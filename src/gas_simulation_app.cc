@@ -7,7 +7,7 @@ IdealGasApp::IdealGasApp() {
   ci::app::setWindowSize(GasContainer::kWindowSize, GasContainer::kWindowSize);
 }
 
-void IdealGasApp::create() {
+void IdealGasApp::setup() {
   container_.PopulateContainer(kColor, kNumber, kRadius);
 }
 

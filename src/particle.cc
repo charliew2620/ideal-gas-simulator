@@ -43,6 +43,8 @@ void Particle::NegateYVelocity() {
 }
 
 void Particle::Draw() {
+  ci::gl::color(ci::Color(color_.c_str()));
+  ci::gl::drawSolidCircle(vec2(position_), 10);
 }
 //bool Particle::canCollideWithParticle(const Particle& other_particle) {
 //  if (glm::distance(this->position_, other_particle.position_) <

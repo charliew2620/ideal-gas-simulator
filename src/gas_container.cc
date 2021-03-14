@@ -11,10 +11,16 @@ GasContainer::GasContainer() {
 
 void GasContainer::Display() const {
   // This function has a lot of magic numbers; be sure to design your code in a way that avoids this.
-  ci::gl::color(ci::Color("red"));
+  ci::gl::color(ci::Color("blue"));
   ci::gl::drawSolidCircle(vec2(x_position_, y_position_), 10);
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStrokedRect(ci::Rectf(vec2(left_side_, top_side_), vec2(right_side_, bottom_side_)));
+
+  for (Particle particle : particles_) {
+    particle.Draw();
+  }
+
+
 }
 
 void GasContainer::AdvanceOneFrame() {
