@@ -54,13 +54,14 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   }
 }
 void GasContainer::CalculateCollisionWithParticle() {
-  for (int i = 0; i < particles_)
-  for (int j = 0; j < particles_.size(); j++) {
-    if (&particle != &particles_[j] && particle.canCollideWithParticle(particles_[j])) {
-      vec2 particle_velocity = ChangeVelocity(particle, particles_[j]);
-      vec2 other_velocity = ChangeVelocity(particles_[j], particle);
-      particle.SetNewVelocity(particle_velocity);
-      particles_[j].SetNewVelocity(other_velocity);
+  for (size_t i = 0; i < particles_.size(); i++) {
+    for (size_t j = 0; j < particles_.size(); j++) {
+      if (particles_[i].canCollideWithParticle(particles_[j])) {
+        vec2 particle_velocity = ChangeVelocity(particles_[i], particles_[j]);
+        vec2 other_velocity = ChangeVelocity(particles_[j], particles_[i]);
+        particles_[i].SetNewVelocity(particle_velocity);
+        particles_[j].SetNewVelocity(other_velocity);
+      }
     }
   }
 }
