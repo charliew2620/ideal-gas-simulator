@@ -16,7 +16,7 @@ class Particle {
    * @param radius of the particle.
    */
   Particle(const glm::vec2& position, const glm::vec2& velocity,
-           const std::string color, const double radius);
+           const std::string& color, const double radius);
 
   /**
    * Draws the particle into the container.

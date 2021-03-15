@@ -14,6 +14,8 @@ namespace idealgas {
 class GasContainer {
  public:
 
+  GasContainer(const int bottom_wall, const int top_wall,
+               const int left_wall, const int right_wall);
   /**
    * Displays the container walls and the current positions of the particles.
    */
@@ -34,14 +36,11 @@ class GasContainer {
    */
   void PopulateContainer(const std::string& color, size_t number, double radius);
 
-  static const int kWindowSize = 800;
-  const int kMargin = 108;
-
  private:
-  const int bottom_wall_ = kWindowSize - kMargin;
-  const int top_wall_ = kMargin;
-  const int left_wall_ = kMargin;
-  const int right_wall_ = kWindowSize - kMargin;
+  int bottom_wall_;
+  int top_wall_;
+  int left_wall_;
+  int right_wall_;
   const double max_velocity_ = 1.5;
   const double min_velocity_ = -1.5;
 

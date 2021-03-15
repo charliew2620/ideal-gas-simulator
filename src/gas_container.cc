@@ -5,6 +5,14 @@
 namespace idealgas {
 using glm::vec2;
 
+GasContainer::GasContainer(const int bottom_wall, const int top_wall,
+                           const int left_wall, const int right_wall) {
+  bottom_wall_ = bottom_wall;
+  top_wall_ = top_wall;
+  left_wall_ = left_wall;
+  right_wall_ = right_wall;
+}
+
 void GasContainer::Display() const {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStrokedRect(ci::Rectf(vec2(left_wall_, top_wall_),

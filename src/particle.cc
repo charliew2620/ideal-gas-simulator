@@ -1,12 +1,9 @@
 #include <gas_container.h>
 #include <particle.h>
-#include <gas_simulation_app.h>
-
-#include "cinder/gl/gl.h"
 
 namespace idealgas {
 
-Particle::Particle(const vec2& position, const vec2& velocity, const std::string color,
+Particle::Particle(const vec2& position, const vec2& velocity, const std::string& color,
                    const double radius) {
   position_ = position;
   velocity_ = velocity;

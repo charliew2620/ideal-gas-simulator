@@ -11,6 +11,8 @@ namespace idealgas {
  * An app for visualizing the behavior of an ideal gas.
  */
 class IdealGasApp : public ci::app::App {
+  const int kWindowSize = 800;
+  const int kMargin = 108;
  public:
   /**
    * Sets window size.
