@@ -43,18 +43,16 @@ void Particle::NegateYVelocity() {
 }
 
 void Particle::Draw() {
-//  if (!is_initialized_) {
-//    GiveRandomPosition();
-//    is_initialized_ = true;
-//  }
   ci::gl::color(ci::Color(color_.c_str()));
   ci::gl::drawSolidCircle(vec2(position_), static_cast<float>(radius_));
 }
 
 
 bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
+  // Checks to see if particles are in collision distance with each other.
   if (glm::distance(particle.position_, other.position_) <=
       particle.radius_ + other.radius_) {
+    // Makes sure particles won't stick together using equation from document.
     return glm::dot(particle.position_ - other.position_,
                     particle.velocity_ - other.velocity_) < 0;
   }
@@ -63,5 +61,4 @@ bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
 void Particle::SetNewVelocity(const glm::vec2& velocity) {
   velocity_ = velocity;
 }
-
 }

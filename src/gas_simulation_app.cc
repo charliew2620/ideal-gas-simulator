@@ -8,11 +8,11 @@ IdealGasApp::IdealGasApp() {
 }
 
 void IdealGasApp::setup() {
-  container_.PopulateContainer(kColor, kNumber, kRadius);
+  container_.PopulateContainer(kParticleColor, kNumber, kRadius);
 }
 
 void IdealGasApp::draw() {
-  ci::Color background_color("black");
+  ci::Color background_color(kBackgroundColor);
   ci::gl::clear(background_color);
 
   container_.Display();
@@ -21,6 +21,4 @@ void IdealGasApp::draw() {
 void IdealGasApp::update() {
   container_.AdvanceOneFrame();
 }
-
-
 }  // namespace idealgas

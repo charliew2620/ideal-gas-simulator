@@ -12,16 +12,31 @@ namespace idealgas {
  */
 class IdealGasApp : public ci::app::App {
  public:
+  /**
+   * Sets window size.
+   */
   IdealGasApp();
 
-  void draw() override;
-  void update() override;
+  /**
+   * Calls PopulateContainer() to populate container with particles.
+   */
   void setup() override;
+
+  /**
+   * Draws the background of the window.
+   */
+  void draw() override;
+
+  /**
+   * Calls AdvanceOneFrame() method and updates particles' positions.
+   */
+  void update() override;
 
  private:
   GasContainer container_;
 
-  const std::string kColor = "green";
+  const cinder::ColorT<float> kBackgroundColor = "black";
+  const std::string kParticleColor = "green";
   const static size_t  kNumber = 30;
   constexpr const static double kRadius = 10;
 };
