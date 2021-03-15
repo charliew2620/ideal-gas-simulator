@@ -82,7 +82,8 @@ void GasContainer::PopulateContainer(const std::string& color, size_t total,
   }
 }
 vec2 GasContainer::GiveRandomPosition() {
-  return vec2(rand() % 634 + 58,rand() % 634 + 58);
+  return vec2(rand() % (right_side_ - left_side_) + left_side_,
+              rand() % (bottom_side_ - top_side_) + top_side_);
 }
 vec2 GasContainer::GiveRandomVelocity() {
   //https://stackoverflow.com/questions/10776073/random-double-between-min-and-max

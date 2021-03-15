@@ -45,8 +45,8 @@ class GasContainer {
   const int left_side_ = kMargin;
   const int right_side_ = kWindowSize - kMargin;
   const int top_side_ = kMargin;
-  const double max_velocity_ = 3.0;
-  const double min_velocity_ = -3.0;
+  const double max_velocity_ = 1.5;
+  const double min_velocity_ = -1.5;
 
   std::vector<Particle> particles_;
 
