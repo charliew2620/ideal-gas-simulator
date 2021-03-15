@@ -1,30 +1,19 @@
 #include <catch2/catch.hpp>
 #include <particle.h>
-#include <gas_container.h>
 
-using idealgas::GasContainer;
+using glm::vec2;
 
-GasContainer container = GasContainer(692, 108, 108, 692);
-
-//TEST_CASE("Valid Particle update with wall collision") {
-//  SECTION("tests valid left wall collision") {
-//    idealgas::Particle particle(vec2(108, 650),
-//                                vec2(-1.5, 0),"red", 10);
-//    container.AdvanceOneFrame();
-//    particle.UpdateParticle();
-//    REQUIRE(particle.GetVelocity() == vec2(1.5, 0));
-//  }
-//}
+idealgas::Particle particle(vec2(650, 650),
+                            vec2(1.5, 1.5), "red", 10);
 
 TEST_CASE("Particle initialization and getters") {
-  idealgas::Particle particle(vec2(650, 650), vec2(0, 1.5), "red", 10);
 
   SECTION("Valid particle position") {
     REQUIRE(particle.GetPosition() == vec2(650, 650));
   }
 
   SECTION("Valid particle velocity") {
-    REQUIRE(particle.GetVelocity() == vec2(0, 1.5));
+    REQUIRE(particle.GetVelocity() == vec2(1.5, 1.5));
   }
 
   SECTION("Valid particle color") {
@@ -36,34 +25,7 @@ TEST_CASE("Particle initialization and getters") {
   }
 }
 
-  TEST_CASE("Testing velocity methods for particle") {
-  idealgas::Particle particle(vec2(650, 650), vec2(1.5, 1.5), "red", 10);
-  SECTION("Negating x velocity") {
-    particle.NegateXVelocity();
-    REQUIRE(particle.GetVelocity() == vec2(-1.5, 1.5));
-  }
-
-  SECTION("Negating y velocity") {
-    particle.NegateYVelocity();
-    REQUIRE(particle.GetVelocity() == vec2(1.5, -1.5));
-  }
-
-  SECTION("Velocity stays the same and position changes") {
-    particle.UpdateParticle();
-    REQUIRE(particle.GetVelocity() == vec2(1.5, 1.5));
-    REQUIRE(particle.GetPosition() == vec2(651.5, 651.5));
-  }
-
-  SECTION("Setting a different velocity") {
-    particle.SetNewVelocity(vec2(-0.5, 2));
-    REQUIRE(particle.GetVelocity() == vec2(-0.5, 2));
-  }
-}
-
   TEST_CASE("Testing particle collision boolean method") {
-    idealgas::Particle particle(vec2(650, 650),
-                                vec2(1.5, 0),"red", 10);
-
     SECTION("Outside collision distance") {
     idealgas::Particle other(vec2(600, 650),
                                 vec2(1.5, 0),"red", 10);
@@ -81,15 +43,25 @@ TEST_CASE("Particle initialization and getters") {
   }
 }
 
-/*
-TODO: Rename this test file. You'll also need to modify CMakeLists.txt.
+TEST_CASE("Testing velocity methods for particle") {
+  SECTION("Negating x velocity") {
+    particle.NegateXVelocity();
+    REQUIRE(particle.GetVelocity() == vec2(-1.5, 1.5));
+  }
 
-You can (and should) create more test files; this project is too big
-for all tests to be in the same file. Remember that, for each file (foo.cc)
-containing non-trivial code, you should have a corresponding test file
-(foo_test.cc)
+  SECTION("Negating y velocity") {
+    particle.NegateYVelocity();
+    REQUIRE(particle.GetVelocity() == vec2(-1.5, -1.5));
+  }
 
-Make sure to add any files that you create to CMakeLists.txt.
+  SECTION("Velocity stays the same and position changes") {
+    particle.UpdateParticle();
+    REQUIRE(particle.GetVelocity() == vec2(-1.5, -1.5));
+    REQUIRE(particle.GetPosition() == vec2(648.5, 648.5));
+  }
 
-TODO Delete this comment and the placeholder test before submitting your code.
-*/
+  SECTION("Setting a different velocity") {
+    particle.SetNewVelocity(vec2(-0.5, 2));
+    REQUIRE(particle.GetVelocity() == vec2(-0.5, 2));
+  }
+}

@@ -31,18 +31,9 @@ void GasContainer::AdvanceOneFrame() {
   }
 }
 
-vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
-  // Uses equation from document to calculate new velocities of particles.
-  vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
-  vec2 position_difference = particle.GetPosition() - other.GetPosition();
-  float length = glm::length(position_difference);
-  return particle.GetVelocity() - ((glm::dot(velocity_difference, position_difference))
-  / pow(length, 2) * position_difference);
-}
-
-void GasContainer::PopulateContainer(const std::string& color, size_t total,
+void GasContainer::PopulateContainer(const std::string& color, size_t amount,
                                      double radius) {
-  for (size_t particle = 0; particle < total; particle++) {
+  for (size_t particle = 0; particle < amount; particle++) {
     particles_.emplace_back(GiveRandomPosition(),
                             glm::vec2(GiveRandomVelocity()), color, radius);
   }
@@ -73,23 +64,23 @@ vec2 GasContainer::GiveRandomVelocity() {
 
 void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   // Checks left wall
-  if (particle.GetPosition().x <= left_wall_ + particle.GetRadius() &&
-      particle.GetVelocity().x < 0) {
+  if (particle.GetPosition().x <= left_wall_ + particle.GetRadius()
+      && particle.GetVelocity().x < 0) {
+    particle.NegateXVelocity();
+  }
+  // Checks right wall
+  if (particle.GetPosition().x >= right_wall_ - particle.GetRadius()
+      && particle.GetVelocity().x > 0) {
     particle.NegateXVelocity();
   }
   // Checks bottom wall
-  if (particle.GetPosition().x + particle.GetRadius() >= right_wall_ &&
-      particle.GetVelocity().x > 0) {
-    particle.NegateXVelocity();
-  }
-  // Checks top wall
-  if (particle.GetPosition().y >= bottom_wall_ - particle.GetRadius() &&
-      particle.GetVelocity().y > 0) {
+  if (particle.GetPosition().y >= bottom_wall_ - particle.GetRadius()
+      && particle.GetVelocity().y > 0) {
     particle.NegateYVelocity();
   }
   // Checks top wall
-  if (particle.GetPosition().y  - particle.GetRadius() <= top_wall_ &&
-      particle.GetVelocity().y < 0) {
+  if (particle.GetPosition().y <= top_wall_ + particle.GetRadius()
+      && particle.GetVelocity().y < 0) {
     particle.NegateYVelocity();
   }
 }
@@ -109,7 +100,16 @@ void GasContainer::CalculateCollisionWithParticle() {
   }
 }
 
-const std::vector<Particle>& GasContainer::GetParticles() const {
+vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
+  // Uses equation from document to calculate new velocities of particles.
+  vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
+  vec2 position_difference = particle.GetPosition() - other.GetPosition();
+  float length = glm::length(position_difference);
+  return particle.GetVelocity() - ((glm::dot(velocity_difference, position_difference))
+                                   / pow(length, 2) * position_difference);
+}
+
+std::vector<Particle>& GasContainer::GetParticles() {
   return particles_;
 }
 }  // namespace idealgas

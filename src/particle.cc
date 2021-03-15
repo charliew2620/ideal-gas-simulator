@@ -50,7 +50,6 @@ bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
   // Checks to see if particles are in collision distance with each other.
   if (glm::distance(particle.position_, other.position_) <=
       particle.radius_ + other.radius_) {
-    std:: cout << "test";
     // Makes sure particles won't stick together using equation from document.
     return glm::dot(particle.position_ - other.position_,
                     particle.velocity_ - other.velocity_) < 0;
