@@ -52,11 +52,11 @@ void Particle::Draw() {
 }
 
 
-bool Particle::canCollideWithParticle(const Particle& other_particle) {
-  if (glm::distance(this->position_, other_particle.position_) <
-      this->radius_ + other_particle.radius_) {
-    return glm::dot(this->position_ - other_particle.position_,
-               this->velocity_ - other_particle.velocity_) < 0;
+bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
+  if (glm::distance(particle.position_, other.position_) <=
+      particle.radius_ + other.radius_) {
+    return glm::dot(particle.position_ - other.position_,
+                    particle.velocity_ - other.velocity_) < 0;
   }
   return false;
 }

@@ -56,11 +56,11 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
 void GasContainer::CalculateCollisionWithParticle() {
   for (size_t i = 0; i < particles_.size(); i++) {
     for (size_t j = 0; j < particles_.size(); j++) {
-      if (particles_[i].canCollideWithParticle(particles_[j])) {
-        vec2 particle_velocity = ChangeVelocity(particles_[i], particles_[j]);
-        vec2 other_velocity = ChangeVelocity(particles_[j], particles_[i]);
-        particles_[i].SetNewVelocity(particle_velocity);
-        particles_[j].SetNewVelocity(other_velocity);
+      if (particles_[i].CanCollideWithParticle(particles_[i], particles_[j])) {
+            vec2 particle_velocity = ChangeVelocity(particles_[i], particles_[j]);
+            vec2 other_velocity = ChangeVelocity(particles_[j], particles_[i]);
+            particles_[i].SetNewVelocity(particle_velocity);
+            particles_[j].SetNewVelocity(other_velocity);
       }
     }
   }
@@ -70,7 +70,7 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
   vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
   vec2 position_difference = particle.GetPosition() - other.GetPosition();
   float length = glm::length(position_difference);
-  return particle.GetVelocity() - (((velocity_difference) * (position_difference))
+  return particle.GetVelocity() - ((glm::dot(velocity_difference, position_difference))
   / pow(length, 2) * position_difference);
 }
 

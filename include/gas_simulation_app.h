@@ -26,7 +26,7 @@ class IdealGasApp : public ci::app::App {
   GasContainer container_;
 
   const std::string kColor = "green";
-  const static size_t  kNumber = 20;
+  const static size_t  kNumber = 30;
   constexpr const static double kRadius = 10;
 };
 

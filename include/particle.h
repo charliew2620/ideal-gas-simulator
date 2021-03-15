@@ -13,7 +13,7 @@ class Particle {
 
   void Draw();
   void UpdateParticle();
-  bool canCollideWithParticle(const Particle& particle);
+  bool CanCollideWithParticle(Particle& particle, Particle& other);
   void NegateXVelocity();
   void NegateYVelocity();
   void SetNewVelocity(const glm::vec2& velocity);
