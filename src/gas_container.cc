@@ -44,10 +44,10 @@ void GasContainer::PopulateContainer(const std::string& color, size_t amount,
 vec2 GasContainer::GiveRandomPosition(double radius) {
   // https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
   // Sets a random position within container for each particle
-  return vec2((right_wall_ - left_wall_ - magic_number_ * radius) *
+  return vec2((right_wall_ - left_wall_ - constant_two_ * radius) *
                       ((double)rand() / (double)RAND_MAX) +
                   left_wall_ + radius,
-              (bottom_wall_ - top_wall_ - magic_number_ * radius) *
+              (bottom_wall_ - top_wall_ - constant_two_ * radius) *
                       ((double)rand() / (double)RAND_MAX) +
                   top_wall_ + radius);
 }
@@ -59,7 +59,7 @@ vec2 GasContainer::GiveRandomVelocity() {
       (max_velocity_ - min_velocity_) * ((double)rand() / (double)RAND_MAX) +
       min_velocity_;
   double y_velocity =
-      sqrt(pow(max_velocity_, magic_number_) - pow(x_velocity, magic_number_));
+      sqrt(pow(max_velocity_, constant_two_) - pow(x_velocity, constant_two_));
   // https://stackoverflow.com/questions/33060893/whats-a-simple-way-to-generate-a-random-bool-in-c
   // Randomizes making y velocity negative
   bool rand_bool = rand() & 1;

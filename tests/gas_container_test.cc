@@ -131,7 +131,7 @@ TEST_CASE("Valid particle update with wall collision") {
   }
 }
 
-TEST_CASE("Test particle collision") {
+TEST_CASE("Tests particle collision") {
   SECTION("Valid collision between two particles with X velocity only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(520, 500), vec2(-1.5, 0), "red",

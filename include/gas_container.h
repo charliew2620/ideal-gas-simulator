@@ -49,7 +49,7 @@ class GasContainer {
   const double max_velocity_ = 2;
   const double min_velocity_ = -2;
 
-  const int magic_number_ = 2;
+  const int constant_two_ = 2;
 
   std::vector<Particle> particles_;
 
