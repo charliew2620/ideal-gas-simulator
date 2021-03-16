@@ -13,9 +13,8 @@ namespace idealgas {
  */
 class GasContainer {
  public:
-
-  GasContainer(const int bottom_wall, const int top_wall,
-               const int left_wall, const int right_wall);
+  GasContainer(const int bottom_wall, const int top_wall, const int left_wall,
+               const int right_wall);
   /**
    * Displays the container walls and the current positions of the particles.
    */
@@ -34,11 +33,12 @@ class GasContainer {
    * @param number of particles to populate container.
    * @param radius set to particle.
    */
-  void PopulateContainer(const std::string& color, size_t number, double radius);
+  void PopulateContainer(const std::string& color, size_t number,
+                         double radius);
 
-  // Unused for now, kept in case if needed for week 2
   std::vector<Particle>& GetParticles();
-  const double &GetMaxMagnitudeVelocity() const;
+  const double& GetMaxMagnitudeVelocity() const;
+
  private:
   int bottom_wall_;
   int top_wall_;

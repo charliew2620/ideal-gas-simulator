@@ -1,13 +1,15 @@
-#include <catch2/catch.hpp>
-#include <particle.h>
 #include <gas_container.h>
+#include <particle.h>
+
+#include <catch2/catch.hpp>
 
 using idealgas::GasContainer;
 
 GasContainer container = GasContainer(692, 108, 108, 692);
 
 TEST_CASE("Tests the spawning of particles inside container") {
-  SECTION("Checks if parameter values are correct in PopulateContainer method") {
+  SECTION(
+      "Checks if parameter values are correct in PopulateContainer method") {
     container.GetParticles().clear();
     container.PopulateContainer("green", 15, 10);
     REQUIRE(container.GetParticles().size() == 15);
@@ -24,11 +26,14 @@ TEST_CASE("Tests the spawning of particles inside container") {
       REQUIRE(particle.GetPosition().y <= 692 - 10);
     }
 
-    SECTION("Tests if velocities of particles are within initial velocity parameters") {
-      //Accounts for both max and min velocities since for loop tests magnitude
+    SECTION(
+        "Tests if velocities of particles are within initial velocity "
+        "parameters") {
+      // Accounts for both max and min velocities since for loop tests magnitude
       for (idealgas::Particle particle : container.GetParticles()) {
-        REQUIRE(sqrt(pow(particle.GetVelocity().x, 2)+ pow(particle.GetVelocity().y, 2))
-                <= container.GetMaxMagnitudeVelocity());
+        REQUIRE(sqrt(pow(particle.GetVelocity().x, 2) +
+                     pow(particle.GetVelocity().y, 2)) <=
+                container.GetMaxMagnitudeVelocity());
       }
     }
   }
@@ -143,7 +148,8 @@ TEST_CASE("Test particle collision") {
   }
 
   SECTION(
-      "Two particles in collision distance but moving away in X component only") {
+      "Two particles in collision distance but moving away in X component "
+      "only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(520, 500), vec2(1.5, 0), "red",
                                           10);
@@ -174,7 +180,8 @@ TEST_CASE("Test particle collision") {
   }
 
   SECTION(
-      "Two particles in collision distance but moving away in Y component only") {
+      "Two particles in collision distance but moving away in Y component "
+      "only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 500), vec2(0, -1.5), "red",
                                           10);
@@ -206,7 +213,8 @@ TEST_CASE("Test particle collision") {
   }
 
   SECTION(
-      "Two particles in collision distance but moving away with both velocity components") {
+      "Two particles in collision distance but moving away with both velocity "
+      "components") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 500), vec2(1.5, -1.5),
                                           "red", 10);
@@ -241,15 +249,18 @@ TEST_CASE("Test particle collision") {
   }
 }
 
-  TEST_CASE("Tests if kinetic energy of all particles stays approximately constant") {
-    container.GetParticles().clear();
+TEST_CASE(
+    "Tests if kinetic energy of all particles stays approximately constant") {
+  container.GetParticles().clear();
   container.PopulateContainer("green", 20, 10);
   double initial_energy_sum = 0;
   double final_energy_sum = 0;
   for (idealgas::Particle particle : container.GetParticles()) {
-    // Currently does not include mass as all particles' masses are the same for week1
-    //Will be a factor in week 2 and changed to include it
-    initial_energy_sum += 0.5 * sqrt(pow(particle.GetVelocity().x, 2) + pow(particle.GetVelocity().y, 2));
+    // Currently does not include mass as all particles' masses are the same for
+    // week1
+    // Will be a factor in week 2 and changed to include it
+    initial_energy_sum += 0.5 * sqrt(pow(particle.GetVelocity().x, 2) +
+                                     pow(particle.GetVelocity().y, 2));
   }
   // Lets particles move around in container for chosen number of frames
   for (int i = 0; i < 20; i++) {
@@ -257,10 +268,12 @@ TEST_CASE("Test particle collision") {
   }
 
   for (idealgas::Particle particle : container.GetParticles()) {
-    // Currently does not include mass as all particles' masses are the same for week1
-    //Will be a factor in week 2 and changed to include it
-    final_energy_sum += 0.5 * sqrt(pow(particle.GetVelocity().x, 2) + pow(particle.GetVelocity().y, 2));
+    // Currently does not include mass as all particles' masses are the same for
+    // week1
+    // Will be a factor in week 2 and changed to include it
+    final_energy_sum += 0.5 * sqrt(pow(particle.GetVelocity().x, 2) +
+                                   pow(particle.GetVelocity().y, 2));
   }
-  //https://stackoverflow.com/questions/6718343/how-to-use-floating-point-tolerances-in-the-catch-framework
+  // https://stackoverflow.com/questions/6718343/how-to-use-floating-point-tolerances-in-the-catch-framework
   REQUIRE(initial_energy_sum == Approx(final_energy_sum).epsilon(1));
 }

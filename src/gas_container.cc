@@ -1,5 +1,7 @@
 #include "gas_container.h"
+
 #include <particle.h>
+
 #include <random>
 
 namespace idealgas {
@@ -15,8 +17,8 @@ GasContainer::GasContainer(const int bottom_wall, const int top_wall,
 
 void GasContainer::Display() const {
   ci::gl::color(ci::Color("white"));
-  ci::gl::drawStrokedRect(ci::Rectf(vec2(left_wall_, top_wall_),
-                                    vec2(right_wall_, bottom_wall_)));
+  ci::gl::drawStrokedRect(
+      ci::Rectf(vec2(left_wall_, top_wall_), vec2(right_wall_, bottom_wall_)));
 
   for (Particle particle : particles_) {
     particle.Draw();
@@ -40,21 +42,26 @@ void GasContainer::PopulateContainer(const std::string& color, size_t amount,
 }
 
 vec2 GasContainer::GiveRandomPosition(double radius) {
-  //https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
-  //Sets a random position within container for each particle
-  return vec2((right_wall_ - left_wall_ - magic_number_ * radius) * ( (double)rand() / (double)RAND_MAX ) + left_wall_ + radius,
-              (bottom_wall_ - top_wall_ - magic_number_ * radius) * ( (double)rand() / (double)RAND_MAX ) + top_wall_ + radius);
+  // https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
+  // Sets a random position within container for each particle
+  return vec2((right_wall_ - left_wall_ - magic_number_ * radius) *
+                      ((double)rand() / (double)RAND_MAX) +
+                  left_wall_ + radius,
+              (bottom_wall_ - top_wall_ - magic_number_ * radius) *
+                      ((double)rand() / (double)RAND_MAX) +
+                  top_wall_ + radius);
 }
 
 vec2 GasContainer::GiveRandomVelocity() {
   // Gives particles random x and y velocities that total up to the magnitude
   // of max velocity
-  double x_velocity = (max_velocity_ - min_velocity_) *
-                          ( (double)rand() / (double)RAND_MAX ) + min_velocity_;
-  double y_velocity = sqrt(pow(max_velocity_, magic_number_)
-                           - pow(x_velocity, magic_number_));
-  //https://stackoverflow.com/questions/33060893/whats-a-simple-way-to-generate-a-random-bool-in-c
-  //Randomizes making y velocity negative
+  double x_velocity =
+      (max_velocity_ - min_velocity_) * ((double)rand() / (double)RAND_MAX) +
+      min_velocity_;
+  double y_velocity =
+      sqrt(pow(max_velocity_, magic_number_) - pow(x_velocity, magic_number_));
+  // https://stackoverflow.com/questions/33060893/whats-a-simple-way-to-generate-a-random-bool-in-c
+  // Randomizes making y velocity negative
   bool rand_bool = rand() & 1;
   if (rand_bool) {
     y_velocity = -y_velocity;
@@ -64,23 +71,23 @@ vec2 GasContainer::GiveRandomVelocity() {
 
 void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   // Checks left wall
-  if (particle.GetPosition().x <= left_wall_ + particle.GetRadius()
-      && particle.GetVelocity().x < 0) {
+  if (particle.GetPosition().x <= left_wall_ + particle.GetRadius() &&
+      particle.GetVelocity().x < 0) {
     particle.NegateXVelocity();
   }
   // Checks right wall
-  if (particle.GetPosition().x >= right_wall_ - particle.GetRadius()
-      && particle.GetVelocity().x > 0) {
+  if (particle.GetPosition().x >= right_wall_ - particle.GetRadius() &&
+      particle.GetVelocity().x > 0) {
     particle.NegateXVelocity();
   }
   // Checks bottom wall
-  if (particle.GetPosition().y >= bottom_wall_ - particle.GetRadius()
-      && particle.GetVelocity().y > 0) {
+  if (particle.GetPosition().y >= bottom_wall_ - particle.GetRadius() &&
+      particle.GetVelocity().y > 0) {
     particle.NegateYVelocity();
   }
   // Checks top wall
-  if (particle.GetPosition().y <= top_wall_ + particle.GetRadius()
-      && particle.GetVelocity().y < 0) {
+  if (particle.GetPosition().y <= top_wall_ + particle.GetRadius() &&
+      particle.GetVelocity().y < 0) {
     particle.NegateYVelocity();
   }
 }
@@ -105,8 +112,9 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
   vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
   vec2 position_difference = particle.GetPosition() - other.GetPosition();
   float length = glm::length(position_difference);
-  return particle.GetVelocity() - ((glm::dot(velocity_difference, position_difference))
-                                   / pow(length, 2) * position_difference);
+  return particle.GetVelocity() -
+         ((glm::dot(velocity_difference, position_difference)) /
+          pow(length, 2) * position_difference);
 }
 
 std::vector<Particle>& GasContainer::GetParticles() {

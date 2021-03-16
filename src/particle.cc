@@ -3,8 +3,8 @@
 
 namespace idealgas {
 
-Particle::Particle(const vec2& position, const vec2& velocity, const std::string& color,
-                   const double radius) {
+Particle::Particle(const vec2& position, const vec2& velocity,
+                   const std::string& color, const double radius) {
   position_ = position;
   velocity_ = velocity;
   color_ = color;
@@ -19,7 +19,6 @@ const glm::vec2& Particle::GetVelocity() const {
   return velocity_;
 }
 
-// Unused for now, needed for testing and week 2 probably
 const std::string& Particle::GetColor() const {
   return color_;
 }
@@ -45,7 +44,6 @@ void Particle::Draw() {
   ci::gl::drawSolidCircle(vec2(position_), static_cast<float>(radius_));
 }
 
-
 bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
   // Checks to see if particles are in collision distance with each other.
   if (glm::distance(particle.position_, other.position_) <=
@@ -59,4 +57,4 @@ bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
 void Particle::SetNewVelocity(const glm::vec2& velocity) {
   velocity_ = velocity;
 }
-}
+}  // namespace idealgas

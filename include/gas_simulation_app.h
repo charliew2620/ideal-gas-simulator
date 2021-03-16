@@ -13,6 +13,7 @@ namespace idealgas {
 class IdealGasApp : public ci::app::App {
   const int kWindowSize = 800;
   const int kMargin = 108;
+
  public:
   /**
    * Sets window size.
@@ -39,7 +40,7 @@ class IdealGasApp : public ci::app::App {
 
   const cinder::ColorT<float> kBackgroundColor = "black";
   const std::string kParticleColor = "green";
-  const static size_t  kNumber = 30;
+  const static size_t kNumber = 30;
   constexpr const static double kRadius = 10;
 };
 
