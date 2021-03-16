@@ -34,25 +34,25 @@ void GasContainer::AdvanceOneFrame() {
 void GasContainer::PopulateContainer(const std::string& color, size_t amount,
                                      double radius) {
   for (size_t particle = 0; particle < amount; particle++) {
-    particles_.emplace_back(GiveRandomPosition(),
+    particles_.emplace_back(GiveRandomPosition(radius),
                             glm::vec2(GiveRandomVelocity()), color, radius);
   }
 }
 
-vec2 GasContainer::GiveRandomPosition() {
+vec2 GasContainer::GiveRandomPosition(double radius) {
+  //https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
   //Sets a random position within container for each particle
-  return vec2(rand() % (right_wall_ - left_wall_) + left_wall_,
-              rand() % (bottom_wall_ - top_wall_) + top_wall_);
+  return vec2((right_wall_ - left_wall_ - magic_number_ * radius) * ( (double)rand() / (double)RAND_MAX ) + left_wall_ + radius,
+              (bottom_wall_ - top_wall_ - magic_number_ * radius) * ( (double)rand() / (double)RAND_MAX ) + top_wall_ + radius);
 }
 
 vec2 GasContainer::GiveRandomVelocity() {
-  //https://stackoverflow.com/questions/10776073/random-double-between-min-and-max
   // Gives particles random x and y velocities that total up to the magnitude
   // of max velocity
   double x_velocity = (max_velocity_ - min_velocity_) *
                           ( (double)rand() / (double)RAND_MAX ) + min_velocity_;
-  double y_velocity = sqrt(pow(max_velocity_, 2)
-                           - pow(x_velocity, 2));
+  double y_velocity = sqrt(pow(max_velocity_, magic_number_)
+                           - pow(x_velocity, magic_number_));
   //https://stackoverflow.com/questions/33060893/whats-a-simple-way-to-generate-a-random-bool-in-c
   //Randomizes making y velocity negative
   bool rand_bool = rand() & 1;
@@ -111,5 +111,8 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
 
 std::vector<Particle>& GasContainer::GetParticles() {
   return particles_;
+}
+const double& GasContainer::GetMaxMagnitudeVelocity() const {
+  return max_velocity_;
 }
 }  // namespace idealgas

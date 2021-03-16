@@ -62,8 +62,5 @@ class Particle {
   glm::vec2  velocity_;
   std::string color_;
   double radius_;
-
-
-
 };
 } // namespace idealgas

@@ -38,14 +38,18 @@ class GasContainer {
 
   // Unused for now, kept in case if needed for week 2
   std::vector<Particle>& GetParticles();
+  const double &GetMaxMagnitudeVelocity() const;
  private:
   int bottom_wall_;
   int top_wall_;
   int left_wall_;
   int right_wall_;
 
-  const double max_velocity_ = 1.5;
-  const double min_velocity_ = -1.5;
+  // Max and min velocities should be the same value in magnitude for same mass
+  const double max_velocity_ = 2;
+  const double min_velocity_ = -2;
+
+  const int magic_number_ = 2;
 
   std::vector<Particle> particles_;
 
@@ -77,7 +81,7 @@ class GasContainer {
    *
    * @return a random position within container.
    */
-  vec2 GiveRandomPosition();
+  vec2 GiveRandomPosition(double radius);
 
   /**
    * Gives particle random velocity to start with.
