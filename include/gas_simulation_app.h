@@ -37,7 +37,6 @@ class IdealGasApp : public ci::app::App {
 
  private:
   GasContainer container_;
-
   const cinder::ColorT<float> kBackgroundColor = "black";
   const std::string kParticleColor = "green";
   const static size_t kNumber = 30;
