@@ -34,10 +34,10 @@ void GasContainer::AdvanceOneFrame() {
 }
 
 void GasContainer::PopulateContainer(const std::string& color, size_t amount,
-                                     double radius) {
+                                     double radius, double mass) {
   for (size_t particle = 0; particle < amount; particle++) {
     particles_.emplace_back(GiveRandomPosition(radius),
-                            glm::vec2(GiveRandomVelocity()), color, radius);
+                            glm::vec2(GiveRandomVelocity()), color, radius, mass);
   }
 }
 

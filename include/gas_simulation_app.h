@@ -38,18 +38,22 @@ class IdealGasApp : public ci::app::App {
  private:
   GasContainer container_;
   const cinder::ColorT<float> kBackgroundColor = "black";
-  const std::string kNormalParticleColor = "green";
-  const static size_t kNormalNumber = 30;
-  constexpr const static double kNormalRadius = 10;
+
+  const std::string kNormalParticleColor = "blue";
+  const static size_t kNormalNumber = 10;
+  constexpr const static double kNormalRadius = 12;
+  constexpr const static double kNormalParticleMass = 10;
 
   // week 2 stuff
-  const std::string kSmallParticleColor = "red";
+  const std::string kSmallParticleColor = "white";
   const static size_t kSmallParticleNumber = 10;
-  constexpr const static double kSmallParticleRadius = 5;
+  constexpr const static double kSmallParticleRadius = 8;
+  constexpr const static double kSmallParticleMass = 50;
 
-  const std::string kBigParticleColor = "blue";
+  const std::string kBigParticleColor = "orange";
   const static size_t kBigParticleNumber = 10;
   constexpr const static double kBigParticleRadius = 15;
+  constexpr const static double kBigParticleMass = 100;
 
 
 

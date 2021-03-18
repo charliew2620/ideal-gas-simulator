@@ -13,7 +13,9 @@ IdealGasApp::IdealGasApp()
 void IdealGasApp::setup() {
   // add the large and small particles here probably
   // either add as parameters or call method again?
-  container_.PopulateContainer(kNormalParticleColor, kNormalNumber, kNormalRadius);
+  container_.PopulateContainer(kNormalParticleColor, kNormalNumber, kNormalRadius, kNormalParticleMass);
+  container_.PopulateContainer(kSmallParticleColor, kSmallParticleNumber, kSmallParticleRadius, kSmallParticleMass);
+  container_.PopulateContainer(kBigParticleColor, kBigParticleNumber, kBigParticleRadius, kBigParticleMass);
 }
 
 void IdealGasApp::draw() {

@@ -35,7 +35,7 @@ class GasContainer {
    * @param radius set to particle.
    */
   void PopulateContainer(const std::string& color, size_t number,
-                         double radius);
+                         double radius, double mass);
 
   std::vector<Particle>& GetParticles();
   const double& GetMaxMagnitudeVelocity() const;

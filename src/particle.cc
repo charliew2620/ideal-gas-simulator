@@ -4,11 +4,12 @@
 namespace idealgas {
 
 Particle::Particle(const vec2& position, const vec2& velocity,
-                   const std::string& color, const double radius) {
+                   const std::string& color, const double radius, const double mass) {
   position_ = position;
   velocity_ = velocity;
   color_ = color;
   radius_ = radius;
+  mass_ = mass;
 }
 
 const glm::vec2& Particle::GetPosition() const {

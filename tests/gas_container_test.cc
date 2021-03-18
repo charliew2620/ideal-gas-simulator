@@ -11,7 +11,7 @@ TEST_CASE("Tests the spawning of particles inside container") {
   SECTION(
       "Checks if parameter values are correct in PopulateContainer method") {
     container.GetParticles().clear();
-    container.PopulateContainer("green", 15, 10);
+    container.PopulateContainer("green", 15, 10, 10);
     REQUIRE(container.GetParticles().size() == 15);
     REQUIRE(container.GetParticles().at(4).GetColor() == "green");
     REQUIRE(container.GetParticles().at(5).GetRadius() == 10);
@@ -43,7 +43,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests valid left wall collision") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(118, 650), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(119.5, 651.5));
@@ -52,7 +52,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests moving away from left wall") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(109, 650), vec2(1.5, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(110.5, 651.5));
@@ -61,7 +61,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests valid right wall collision") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(682, 650), vec2(1.5, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(-1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(680.5, 651.5));
@@ -70,7 +70,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests moving away from right wall") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(687, 650), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(-1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(685.5, 651.5));
@@ -79,7 +79,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests valid top wall collision") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 112), vec2(-1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(-1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(498.5, 113.5));
@@ -88,7 +88,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests moving away from top wall") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 112), vec2(1.5, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(501.5, 113.5));
@@ -97,7 +97,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests valid bottom wall collision") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 688), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(-1.5, -1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(498.5, 686.5));
@@ -106,7 +106,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests moving away from bottom wall") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 688), vec2(1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, -1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(501.5, 686.5));
@@ -115,7 +115,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests particle colliding corner of a wall") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(108, 692), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, -1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(109.5, 690.5));
@@ -124,7 +124,7 @@ TEST_CASE("Valid particle update with wall collision") {
   SECTION("Tests particle moving away from corner") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(108, 692), vec2(1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, -1.5));
     REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(109.5, 690.5));
@@ -135,9 +135,9 @@ TEST_CASE("Tests particle collision") {
   SECTION("Valid collision between two particles with X velocity only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(520, 500), vec2(-1.5, 0), "red",
-                                          10);
+                                          10, 10);
     container.GetParticles().emplace_back(vec2(500, 500), vec2(1.5, 0), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 0));
@@ -152,9 +152,9 @@ TEST_CASE("Tests particle collision") {
       "only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(520, 500), vec2(1.5, 0), "red",
-                                          10);
+                                          10, 10);
     container.GetParticles().emplace_back(vec2(500, 500), vec2(-1.5, 0), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 0));
@@ -167,9 +167,9 @@ TEST_CASE("Tests particle collision") {
   SECTION("Valid collision between two particles with Y velocity only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 500), vec2(0, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.GetParticles().emplace_back(vec2(500, 520), vec2(0, -1.5), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(0, -1.5));
@@ -184,9 +184,9 @@ TEST_CASE("Tests particle collision") {
       "only") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(500, 500), vec2(0, -1.5), "red",
-                                          10);
+                                          10, 10);
     container.GetParticles().emplace_back(vec2(500, 520), vec2(0, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(0, -1.5));
@@ -200,9 +200,9 @@ TEST_CASE("Tests particle collision") {
       "Valid collision between two particles with both velocity components") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 500), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.GetParticles().emplace_back(vec2(500, 510), vec2(1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, -1.5));
@@ -217,9 +217,9 @@ TEST_CASE("Tests particle collision") {
       "components") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 500), vec2(1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.GetParticles().emplace_back(vec2(500, 510), vec2(-1.5, 1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, -1.5));
@@ -232,11 +232,11 @@ TEST_CASE("Tests particle collision") {
   SECTION("Tests valid collision with three particles") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 510), vec2(-1.5, -1.5),
-                                          "red", 10);
+                                          "red", 10, 10);
     container.GetParticles().emplace_back(vec2(500, 500), vec2(1.5, 1.5), "red",
-                                          10);
+                                          10, 10);
     container.GetParticles().emplace_back(vec2(490, 490), vec2(2, 2), "red",
-                                          10);
+                                          10, 10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 1.5));
@@ -252,7 +252,7 @@ TEST_CASE("Tests particle collision") {
 TEST_CASE(
     "Tests if kinetic energy of all particles stays approximately constant") {
   container.GetParticles().clear();
-  container.PopulateContainer("green", 20, 10);
+  container.PopulateContainer("green", 20, 10, 10);
   double initial_energy_sum = 0;
   double final_energy_sum = 0;
   for (idealgas::Particle particle : container.GetParticles()) {
