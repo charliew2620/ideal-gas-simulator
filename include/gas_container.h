@@ -26,6 +26,7 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  // add mass to this method too?
   /**
    * Populates container with particles.
    *

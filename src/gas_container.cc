@@ -6,7 +6,7 @@
 
 namespace idealgas {
 using glm::vec2;
-//Checks to see if week2 branch is pushed to Git
+
 GasContainer::GasContainer(const int bottom_wall, const int top_wall,
                            const int left_wall, const int right_wall) {
   bottom_wall_ = bottom_wall;
@@ -123,4 +123,4 @@ std::vector<Particle>& GasContainer::GetParticles() {
 const double& GasContainer::GetMaxMagnitudeVelocity() const {
   return max_velocity_;
 }
-}  // namespace ideal
+}  // namespace idealgas

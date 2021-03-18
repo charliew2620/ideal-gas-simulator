@@ -57,4 +57,9 @@ bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
 void Particle::SetNewVelocity(const glm::vec2& velocity) {
   velocity_ = velocity;
 }
+
+// week 2
+const double Particle::GetMass() const {
+  return mass_;
+}
 }  // namespace idealgas
