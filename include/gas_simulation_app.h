@@ -42,13 +42,13 @@ class IdealGasApp : public ci::app::App {
   const std::string kNormalParticleColor = "blue";
   const static size_t kNormalNumber = 10;
   constexpr const static double kNormalRadius = 12;
-  constexpr const static double kNormalParticleMass = 10;
+  constexpr const static double kNormalParticleMass = 50;
 
   // week 2 stuff
   const std::string kSmallParticleColor = "white";
   const static size_t kSmallParticleNumber = 10;
   constexpr const static double kSmallParticleRadius = 8;
-  constexpr const static double kSmallParticleMass = 50;
+  constexpr const static double kSmallParticleMass = 10;
 
   const std::string kBigParticleColor = "orange";
   const static size_t kBigParticleNumber = 10;

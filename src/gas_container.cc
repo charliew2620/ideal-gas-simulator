@@ -112,8 +112,10 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
   vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
   vec2 position_difference = particle.GetPosition() - other.GetPosition();
   float length = glm::length(position_difference);
-  return particle.GetVelocity() -
-         ((glm::dot(velocity_difference, position_difference)) /
+  float mass_value = (float) (constant_two_ * other.GetMass() / (particle.GetMass()
+                                                           + other.GetMass()));
+  return particle.GetVelocity() - mass_value
+         * ((glm::dot(velocity_difference, position_difference)) /
           pow(length, 2) * position_difference);
 }
 
