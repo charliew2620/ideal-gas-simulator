@@ -15,18 +15,18 @@ GasContainer::GasContainer(const int bottom_wall, const int top_wall,
   right_wall_ = right_wall;
 }
 
-void GasContainer::Display() const {
+void GasContainer::Display() {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStrokedRect(
       ci::Rectf(vec2(left_wall_, top_wall_), vec2(right_wall_, bottom_wall_)));
 
-  for (Particle particle : particles_) {
+  for (Particle& particle : particles_) {
     particle.Draw();
   }
 }
 
 void GasContainer::AdvanceOneFrame() {
-  CalculateCollisionWithParticle();
+  HandlePossibleParticleCollision();
   for (Particle& particle : particles_) {
     CalculateCollisionWithWall(particle);
     particle.UpdateParticle();
@@ -92,12 +92,12 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   }
 }
 
-void GasContainer::CalculateCollisionWithParticle() {
+void GasContainer::HandlePossibleParticleCollision() {
   // Uses double for loop to check if each particle is in collision distance
   // with another particle and changes their velocities if true
   for (size_t i = 0; i < particles_.size(); i++) {
     for (size_t j = 0; j < particles_.size(); j++) {
-      if (particles_[i].CanCollideWithParticle(particles_[i], particles_[j])) {
+      if (CanCollideWithParticle(particles_[i], particles_[j])) {
         vec2 particle_velocity = ChangeVelocity(particles_[i], particles_[j]);
         vec2 other_velocity = ChangeVelocity(particles_[j], particles_[i]);
         particles_[i].SetNewVelocity(particle_velocity);
@@ -105,6 +105,17 @@ void GasContainer::CalculateCollisionWithParticle() {
       }
     }
   }
+}
+
+bool GasContainer::CanCollideWithParticle(Particle& particle, Particle& other) {
+  // Checks to see if particles are in collision distance with each other.
+  if (glm::distance(particle.GetPosition(), other.GetPosition()) <=
+      particle.GetRadius() + other.GetRadius()) {
+    // Makes sure particles won't stick together using equation from document.
+    return glm::dot(particle.GetPosition() - other.GetPosition(),
+                    particle.GetVelocity() - other.GetVelocity()) < 0;
+  }
+  return false;
 }
 
 vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {

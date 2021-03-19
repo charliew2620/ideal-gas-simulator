@@ -30,14 +30,6 @@ class Particle {
   void UpdateParticle();
 
   /**
-   * Checks if a particle is within collision distance with another particle.
-   * @param One of two passed particles.
-   * @param Other particle to compare with the first particle object.
-   * @return true or false if the particles collide.
-   */
-  bool CanCollideWithParticle(Particle& particle, Particle& other);
-
-  /**
    * Negates d component of velocity.
    */
   void NegateXVelocity();

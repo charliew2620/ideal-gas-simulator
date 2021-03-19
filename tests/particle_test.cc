@@ -25,24 +25,6 @@ TEST_CASE("Particle initialization and getters") {
   }
 }
 
-  TEST_CASE("Testing particle collision boolean method") {
-    SECTION("Outside collision distance") {
-    idealgas::Particle other(vec2(600, 650),
-                                vec2(1.5, 0),"red", 10, 10);
-    REQUIRE(!particle.CanCollideWithParticle(particle, other));
-  }
-  SECTION("In collision distance but velocities aren't opposite") {
-    idealgas::Particle other(vec2(645, 650),
-                             vec2(1.5, 1.5),"red", 10, 10);
-    REQUIRE(!particle.CanCollideWithParticle(particle, other));
-  }
-  SECTION("Is in collision distance with opposite velocities") {
-    idealgas::Particle other(vec2(669, 651),
-                             vec2(-1.5, 0),"red", 10, 10);
-    REQUIRE(particle.CanCollideWithParticle(particle, other));
-  }
-}
-
 TEST_CASE("Testing velocity methods for particle") {
   SECTION("Negating x velocity") {
     particle.NegateXVelocity();

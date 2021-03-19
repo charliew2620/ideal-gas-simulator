@@ -18,7 +18,7 @@ class GasContainer {
   /**
    * Displays the container walls and the current positions of the particles.
    */
-  void Display() const;
+  void Display();
 
   /**
    * Updates the positions and velocities of all particles (based on the rules
@@ -64,7 +64,15 @@ class GasContainer {
   /**
    *Changes particle's velocity if it hits another particle.
    */
-  void CalculateCollisionWithParticle();
+  void HandlePossibleParticleCollision();
+
+  /**
+   * Checks if a particle is within collision distance with another particle.
+   * @param One of two passed particles.
+   * @param Other particle to compare with the first particle object.
+   * @return true or false if the particles collide.
+   */
+  bool CanCollideWithParticle(Particle& particle, Particle& other);
 
   /**
    * Returns the new velocity of the particle after colliding with
