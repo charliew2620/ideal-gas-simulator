@@ -1,6 +1,9 @@
 #include <gas_container.h>
 #include <particle.h>
 
+//to do: adjustments from week 1, histogram, adjust tests for week2,
+//if time: speed up(use multiplier?), or json(find library), or equation overlay: v=root(2rt/m)?
+
 namespace idealgas {
 
 Particle::Particle(const vec2& position, const vec2& velocity,
@@ -10,22 +13,6 @@ Particle::Particle(const vec2& position, const vec2& velocity,
   color_ = color;
   radius_ = radius;
   mass_ = mass;
-}
-
-const glm::vec2& Particle::GetPosition() const {
-  return position_;
-}
-
-const glm::vec2& Particle::GetVelocity() const {
-  return velocity_;
-}
-
-const std::string& Particle::GetColor() const {
-  return color_;
-}
-
-const double& Particle::GetRadius() const {
-  return radius_;
 }
 
 void Particle::UpdateParticle() {
@@ -57,6 +44,22 @@ bool Particle::CanCollideWithParticle(Particle& particle, Particle& other) {
 }
 void Particle::SetNewVelocity(const glm::vec2& velocity) {
   velocity_ = velocity;
+}
+
+const glm::vec2& Particle::GetPosition() const {
+  return position_;
+}
+
+const glm::vec2& Particle::GetVelocity() const {
+  return velocity_;
+}
+
+const std::string& Particle::GetColor() const {
+  return color_;
+}
+
+const double& Particle::GetRadius() const {
+  return radius_;
 }
 
 // week 2

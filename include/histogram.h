@@ -1,8 +1,21 @@
-//
-// Created by charl on 3/17/2021.
-//
 
-#ifndef IDEAL_GAS_HISTOGRAM_H
-#define IDEAL_GAS_HISTOGRAM_H
 
-#endif  // IDEAL_GAS_HISTOGRAM_H
+
+namespace idealgas {
+class Histogram {
+
+  //3 separate graphs, not combined
+ public:
+  Histogram();
+
+  void DrawHistogram(const int bottom_wall, const int top_wall, const int left_wall,
+                     const int right_wall);
+
+  void CreateHistogram();
+
+  void UpdateHistogram();
+
+ private:
+};
+
+}
