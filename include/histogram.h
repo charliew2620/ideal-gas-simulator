@@ -1,6 +1,7 @@
 
 
 #include <string>
+#include "particle.h"
 namespace idealgas {
 class Histogram {
 
@@ -13,7 +14,9 @@ class Histogram {
 
   void CreateHistogram();
 
-  void UpdateHistogram();
+  void UpdateHistogram(const std::vector<Particle> &particle);
+
+  std::vector<Particle> GetSpeedsOfParticlesList();
 
  private:
 
@@ -22,6 +25,11 @@ class Histogram {
   int left_wall_;
   int right_wall_;
   std::string color_;
+
+  std::vector<Particle> particles_;
+
+  double max_speed_;
+  double min_speed_;
 };
 
 }

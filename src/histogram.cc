@@ -1,4 +1,5 @@
 #include "histogram.h"
+#include "particle.h"
 
 namespace idealgas {
 
@@ -18,7 +19,16 @@ void Histogram::DrawHistogram() {
 
 void Histogram::CreateHistogram() {
 }
-void Histogram::UpdateHistogram() {
+void Histogram::UpdateHistogram(const std::vector<Particle> &particles) {
+  particles_ = particles;
+}
+std::vector<Particle> Histogram::GetSpeedsOfParticlesList() {
+  std::vector<double> particles_speeds;
+  if (particles_.size() >  0) {
+    for (Particle particle : particles_) {
+      particles_speeds.push_back(particle.GetSpeed());
+    }
+  }
 }
 
 }

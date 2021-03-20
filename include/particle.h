@@ -51,7 +51,8 @@ class Particle {
   const std::string& GetColor() const;
   const double& GetRadius() const;
   // week2
-  const double GetMass() const;
+  const double& GetMass() const;
+  const double GetSpeed() const;
 
  private:
   glm::vec2 position_;

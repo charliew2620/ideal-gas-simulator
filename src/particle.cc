@@ -53,7 +53,11 @@ const double& Particle::GetRadius() const {
 }
 
 // week 2
-const double Particle::GetMass() const {
+const double& Particle::GetMass() const {
   return mass_;
+}
+
+const double Particle::GetSpeed() const {
+  return glm::length(velocity_);
 }
 }  // namespace idealgas
