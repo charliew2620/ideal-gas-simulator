@@ -4,6 +4,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "gas_container.h"
+#include "histogram.h"
 
 namespace idealgas {
 
@@ -11,8 +12,8 @@ namespace idealgas {
  * An app for visualizing the behavior of an ideal gas.
  */
 class IdealGasApp : public ci::app::App {
-  const int kWindowSize = 800;
-  const int kMargin = 108;
+  const int kWindowSize = 900;
+  const int kMargin = 100;
 
  public:
   /**
@@ -54,6 +55,10 @@ class IdealGasApp : public ci::app::App {
   const static size_t kBigParticleNumber = 10;
   constexpr const static double kBigParticleRadius = 15;
   constexpr const static double kBigParticleMass = 30;
+
+  Histogram small_histogram_;
+//  Histogram normal_histogram_;
+//  Histogram big_histogram_;
 
 
 

@@ -1,12 +1,15 @@
 #include "gas_simulation_app.h"
 
 #include <gas_container.h>
+#include "histogram.h"
 
 namespace idealgas {
 
 IdealGasApp::IdealGasApp()
-    : container_(GasContainer(kWindowSize - kMargin, kMargin, kMargin,
-                              kWindowSize - kMargin)) {
+    : container_(GasContainer(kWindowSize - kMargin, kMargin, kWindowSize / 2,
+                              kWindowSize - kMargin)),
+      small_histogram_(kWindowSize - kMargin, kMargin, kWindowSize / 2,
+                       kWindowSize - kMargin, kSmallParticleColor) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 

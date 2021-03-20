@@ -4,7 +4,6 @@
 #include <catch2/catch.hpp>
 
 using idealgas::GasContainer;
-
 GasContainer container = GasContainer(692, 108, 108, 692);
 
 TEST_CASE("Tests the spawning of particles inside container") {
@@ -17,6 +16,7 @@ TEST_CASE("Tests the spawning of particles inside container") {
     REQUIRE(container.GetParticles().at(5).GetRadius() == 10);
   }
   SECTION("Checks if particle fully spawns inside container") {
+    container.GetParticles().clear();
     for (idealgas::Particle particle : container.GetParticles()) {
       // Checks if particles spawns FULLY inside top and left wall
       REQUIRE(particle.GetPosition().x >= 108 + 10);

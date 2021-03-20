@@ -40,6 +40,8 @@ class GasContainer {
   std::vector<Particle>& GetParticles();
   const double& GetMaxMagnitudeVelocity() const;
 
+  std::vector<Particle> GetParticlesByMass(double mass);
+
  private:
   int bottom_wall_;
   int top_wall_;

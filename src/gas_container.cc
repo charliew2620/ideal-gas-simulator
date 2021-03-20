@@ -130,6 +130,16 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
           pow(length, 2) * position_difference);
 }
 
+std::vector<Particle> GasContainer::GetParticlesByMass(double mass) {
+  std::vector<Particle> particles;
+  for (Particle particle : particles_) {
+    if (particle.GetMass() == mass) {
+      particles.push_back(particle);
+    }
+  }
+  return particles;
+}
+
 std::vector<Particle>& GasContainer::GetParticles() {
   return particles_;
 }
