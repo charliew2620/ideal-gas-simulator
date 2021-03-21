@@ -26,7 +26,7 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
   max_speed_ = *max_element(particles_speeds_.begin(), particles_speeds_.end());
   min_speed_ = *min_element(particles_speeds_.begin(), particles_speeds_.end());
 
-  double speed_range = (max_speed_) / kNumberOfBars;
+  double speed_range = 15 / kNumberOfBars;
 
   //Should fill bars_ with number of particles in specified speed range
   for (size_t i = 0; i < bars_.size(); i++) {
@@ -48,9 +48,9 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
 
   //Should draw the graph here
   for (size_t i = 0; i < bars_.size(); i++) {
-    int height = bottom_wall_ + bars_[i];
+    int height = bottom_wall_ - bars_[i] * 2;
     ci::gl::color(ci::Color(color_.c_str()));
-    ci::gl::drawSolidRect(ci::Rectf(vec2(left_bound, bottom_wall_ - height * 0.1), vec2(left_bound - bar_range, bottom_wall_)));
+    ci::gl::drawSolidRect(ci::Rectf(vec2(left_bound, bottom_wall_), vec2(left_bound - bar_range, height)));
     left_bound -= bar_range;
 
   }

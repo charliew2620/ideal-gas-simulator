@@ -30,7 +30,7 @@ class Histogram {
   std::vector<Particle> particles_;
   std::vector<double> particles_speeds_;
 
-  const static int kNumberOfBars = 5;
+  const static int kNumberOfBars = 10;
   std::vector<int> bars_ = std::vector<int>(kNumberOfBars);
   double max_speed_;
   double min_speed_;

@@ -41,24 +41,24 @@ class IdealGasApp : public ci::app::App {
   const cinder::ColorT<float> kBackgroundColor = "black";
 
   const std::string kNormalParticleColor = "blue";
-  const static size_t kNormalNumber = 10;
+  const static size_t kNormalNumber = 20;
   constexpr const static double kNormalRadius = 12;
   constexpr const static double kNormalParticleMass = 15;
 
   // week 2 stuff
   const std::string kSmallParticleColor = "white";
-  const static size_t kSmallParticleNumber = 10;
+  const static size_t kSmallParticleNumber = 20;
   constexpr const static double kSmallParticleRadius = 8;
   constexpr const static double kSmallParticleMass = 5;
 
   const std::string kBigParticleColor = "orange";
-  const static size_t kBigParticleNumber = 10;
+  const static size_t kBigParticleNumber = 20;
   constexpr const static double kBigParticleRadius = 15;
   constexpr const static double kBigParticleMass = 30;
 
   Histogram small_histogram_;
-//  Histogram normal_histogram_;
-//  Histogram big_histogram_;
+  Histogram normal_histogram_;
+  Histogram big_histogram_;
 
 
 
