@@ -26,7 +26,13 @@ void GasContainer::Display() {
 }
 
 void GasContainer::AdvanceOneFrame() {
-  HandlePossibleParticleCollision();
+  for (size_t i = 0; i < particles_.size(); i++) {
+    for (size_t j = 0; j < particles_.size(); j++) {
+      if (CanCollideWithParticle(particles_[i], particles_[j])) {
+        HandleParticleCollision(particles_[i], particles_[j]);
+      }
+    }
+  }
   for (Particle& particle : particles_) {
     CalculateCollisionWithWall(particle);
     particle.UpdateParticle();
@@ -95,19 +101,13 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   }
 }
 
-void GasContainer::HandlePossibleParticleCollision() {
+void GasContainer::HandleParticleCollision(Particle& particle, Particle& other) {
   // Uses double for loop to check if each particle is in collision distance
   // with another particle and changes their velocities if true
-  for (size_t i = 0; i < particles_.size(); i++) {
-    for (size_t j = 0; j < particles_.size(); j++) {
-      if (CanCollideWithParticle(particles_[i], particles_[j])) {
-        vec2 particle_velocity = ChangeVelocity(particles_[i], particles_[j]);
-        vec2 other_velocity = ChangeVelocity(particles_[j], particles_[i]);
-        particles_[i].SetNewVelocity(particle_velocity);
-        particles_[j].SetNewVelocity(other_velocity);
-      }
-    }
-  }
+  vec2 particle_velocity = ChangeVelocity(particle, other);
+  vec2 other_velocity = ChangeVelocity(other, particle);
+  particle.SetNewVelocity(particle_velocity);
+  other.SetNewVelocity(other_velocity);
 }
 
 bool GasContainer::CanCollideWithParticle(Particle& particle, Particle& other) {

@@ -39,7 +39,6 @@ class GasContainer {
 
   std::vector<Particle>& GetParticles();
   const double& GetMaxMagnitudeVelocity() const;
-
   std::vector<Particle> GetParticlesByMass(double mass);
 
  private:
@@ -66,7 +65,7 @@ class GasContainer {
   /**
    *Changes particle's velocity if it hits another particle.
    */
-  void HandlePossibleParticleCollision();
+  void HandleParticleCollision(Particle& particle, Particle& other);
 
   /**
    * Checks if a particle is within collision distance with another particle.

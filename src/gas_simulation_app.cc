@@ -7,12 +7,12 @@ namespace idealgas {
 IdealGasApp::IdealGasApp()
     : container_(GasContainer(kWindowSize - kMargin, kMargin, kWindowSize / 3,
                               kWindowSize - kMargin)),
-      small_histogram_(Histogram(kWindowSize - 700, kWindowSize - 850, kMargin,
-                       250, kSmallParticleColor)),
-      normal_histogram_(Histogram(kWindowSize - 500, kWindowSize - 650, kMargin,
-                                  250, kNormalParticleColor)),
-      big_histogram_(Histogram(kWindowSize - 300, kWindowSize - 450, kMargin,
-                               250, kBigParticleColor))
+      small_histogram_(Histogram(kWindowSize - 700, kWindowSize - 825, kMargin,
+                       250, kSmallParticleColor, kSmallParticleNumber)),
+      normal_histogram_(Histogram(kWindowSize - 500, kWindowSize - 625, kMargin,
+                                  250, kNormalParticleColor, kNormalNumber)),
+      big_histogram_(Histogram(kWindowSize - 300, kWindowSize - 425, kMargin,
+                               250, kBigParticleColor, kBigParticleNumber))
 {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }

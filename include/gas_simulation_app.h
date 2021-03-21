@@ -13,7 +13,7 @@ namespace idealgas {
  */
 class IdealGasApp : public ci::app::App {
   const int kWindowSize = 900;
-  const int kMargin = 100;
+  const int kMargin = 90;
 
  public:
   /**
@@ -49,12 +49,12 @@ class IdealGasApp : public ci::app::App {
   const std::string kSmallParticleColor = "white";
   const static size_t kSmallParticleNumber = 25;
   constexpr const static double kSmallParticleRadius = 8;
-  constexpr const static double kSmallParticleMass = 10;
+  constexpr const static double kSmallParticleMass = 12;
 
   const std::string kBigParticleColor = "orange";
   const static size_t kBigParticleNumber = 25;
   constexpr const static double kBigParticleRadius = 15;
-  constexpr const static double kBigParticleMass = 30;
+  constexpr const static double kBigParticleMass = 25;
 
   Histogram small_histogram_;
   Histogram normal_histogram_;

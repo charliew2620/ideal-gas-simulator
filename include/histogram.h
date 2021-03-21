@@ -1,23 +1,29 @@
-
-
 #include <string>
 #include "particle.h"
 #include "cinder/gl/gl.h"
 namespace idealgas {
+/**
+ * Histogram that graphs the particles and their speeds. The class updates
+ * their speeds every frame and shows them in the simulation.
+ */
 class Histogram {
 
-  //3 separate graphs, not combined
-
-  // create 5 bars, size depends of max - min speed range, find number of particles within each size range of bar
  public:
   Histogram(const int bottom_wall, const int top_wall, const int left_wall,
-            const int right_wall, const std::string& color);
+            const int right_wall, const std::string& color, const int amount);
 
-  void DrawHistogram(const std::vector<Particle>& particle);
+  /**
+   * Draws all the components of the histogram.
+   * @param particles passed all of the same mass from gas simulation app class.
+   */
+  void DrawHistogram(const std::vector<Particle>& particles);
 
-  void UpdateHistogram(const std::vector<Particle> &particle);
-
-  std::vector<double> GetSpeedsOfParticlesList(const std::vector<Particle> &particles);
+  /**
+   * Gets the speed of every particle passed in the list.
+   * @param particles passed all of the same mass from gas simulation app class.
+   * @return the particles' speeds as a list.
+   */
+  const std::vector<double> GetSpeedsOfParticlesList(const std::vector<Particle>& particles) const;
 
  private:
 
@@ -25,26 +31,36 @@ class Histogram {
   int top_wall_;
   int left_wall_;
   int right_wall_;
+  int amount_;
   std::string color_;
 
-  std::vector<Particle> particles_;
   std::vector<double> particles_speeds_;
 
   const static int kNumberOfBars = 10;
   std::vector<int> bars_ = std::vector<int>(kNumberOfBars);
-  double max_speed_ = 10;
+  constexpr const static double max_speed_ = 10;
+  constexpr const static double factor = 5;
+  constexpr const static double increment = 5;
   double min_speed_;
 
-  double histogram_length_;
-
-  std::vector<int> particles_in_bar_;
-
+  /**
+   * Counts the number of particles to be drawn out in each bar
+   */
   void CountParticlesInEachBar();
 
+  /**
+   * Draws the bars of the histogram.
+   */
   void DrawBars();
 
+  /**
+   * Draws the X axis.
+   */
   void DrawXAxis();
 
+  /**
+   * Draws the Y axis.
+   */
   void DrawYAxis();
 };
 
