@@ -7,8 +7,8 @@ namespace idealgas {
 IdealGasApp::IdealGasApp()
     : container_(GasContainer(kWindowSize - kMargin, kMargin, kWindowSize / 2,
                               kWindowSize - kMargin)),
-      small_histogram_(Histogram(kWindowSize / 2, kMargin / 2, 1,
-                       kWindowSize / 2, kSmallParticleColor)) {
+      small_histogram_(Histogram(kWindowSize / 3, kMargin / 2, kMargin,
+                       kWindowSize / 2 - kMargin, kSmallParticleColor)) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 
@@ -26,7 +26,7 @@ void IdealGasApp::draw() {
 
   container_.Display();
 
-  small_histogram_.DrawHistogram();
+  small_histogram_.DrawHistogram(container_.GetParticlesByMass(kSmallParticleMass));
 }
 
 void IdealGasApp::update() {
