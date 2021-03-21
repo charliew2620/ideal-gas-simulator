@@ -18,6 +18,8 @@ Histogram::Histogram(const int bottom_wall, const int top_wall,
 //To get mass, call the getter? and make a method or constructor
 void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
 
+  DrawXAxis();
+
   ci::gl::color(ci::Color(color_.c_str()));
   ci::gl::drawStrokedRect(
       ci::Rectf(vec2(left_wall_, top_wall_), vec2(right_wall_, bottom_wall_)));
@@ -26,7 +28,7 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
   max_speed_ = *max_element(particles_speeds_.begin(), particles_speeds_.end());
   min_speed_ = *min_element(particles_speeds_.begin(), particles_speeds_.end());
 
-  double speed_range = 15 / kNumberOfBars;
+  double speed_range = 10 / kNumberOfBars;
 
   //Should fill bars_ with number of particles in specified speed range
   for (size_t i = 0; i < bars_.size(); i++) {
@@ -44,14 +46,14 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
   double left_bound = left_wall_;
   double right_bound = right_wall_;
 
-  double bar_range = (left_bound - right_bound) / kNumberOfBars;
+  double bar_range = (right_bound - left_bound) / kNumberOfBars;
 
   //Should draw the graph here
   for (size_t i = 0; i < bars_.size(); i++) {
     int height = bottom_wall_ - bars_[i] * 2;
     ci::gl::color(ci::Color(color_.c_str()));
-    ci::gl::drawSolidRect(ci::Rectf(vec2(left_bound, bottom_wall_), vec2(left_bound - bar_range, height)));
-    left_bound -= bar_range;
+    ci::gl::drawSolidRect(ci::Rectf(vec2(left_bound, bottom_wall_), vec2(left_bound + bar_range, height)));
+    left_bound += bar_range;
 
   }
 }
@@ -68,6 +70,27 @@ std::vector<double> Histogram::GetSpeedsOfParticlesList(const std::vector<Partic
     }
   }
   return particles_speeds;
+}
+void Histogram::DrawXAxis() {
+  double left_bound = left_wall_;
+  double right_bound = right_wall_;
+  double bar_range = (right_bound - left_bound) / kNumberOfBars;
+  ci::gl::color(ci::Color("white"));
+
+  double speed_label = 0;
+
+
+  for (double bar = 0; bar <= kNumberOfBars; bar++) {
+
+    ci::gl::drawStringCentered(std::to_string((size_t) speed_label), glm::vec2
+                                   (left_bound, (bottom_wall_ + 5)),
+                               ci::Color("white"),
+                               ci::Font("Times New Roman", 15));
+    left_bound += bar_range;
+    speed_label++;
+  }
+}
+void Histogram::DrawYAxis() {
 }
 
 }

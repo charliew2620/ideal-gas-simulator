@@ -29,7 +29,7 @@ void Particle::NegateYVelocity() {
 
 void Particle::Draw() {
   ci::gl::color(ci::Color(color_.c_str()));
-  ci::gl::drawSolidCircle(vec2(position_), static_cast<float>(radius_));
+  ci::gl::drawSolidCircle(vec2(position_), (float) radius_);
 }
 
 void Particle::SetNewVelocity(const glm::vec2& velocity) {

@@ -38,6 +38,10 @@ class Histogram {
   double histogram_length_;
 
   std::vector<int> particles_in_bar_;
+
+  void DrawXAxis();
+
+  void DrawYAxis();
 };
 
 }
