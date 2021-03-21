@@ -32,12 +32,16 @@ class Histogram {
 
   const static int kNumberOfBars = 10;
   std::vector<int> bars_ = std::vector<int>(kNumberOfBars);
-  double max_speed_;
+  double max_speed_ = 10;
   double min_speed_;
 
   double histogram_length_;
 
   std::vector<int> particles_in_bar_;
+
+  void CountParticlesInEachBar();
+
+  void DrawBars();
 
   void DrawXAxis();
 
