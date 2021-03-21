@@ -13,7 +13,7 @@ class Histogram {
   Histogram(const int bottom_wall, const int top_wall, const int left_wall,
             const int right_wall, const std::string& color);
 
-  void DrawHistogram(const std::vector<Particle> &particle);
+  void DrawHistogram(const std::vector<Particle>& particle);
 
   void UpdateHistogram(const std::vector<Particle> &particle);
 

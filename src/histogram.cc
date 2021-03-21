@@ -34,7 +34,7 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
   for (size_t i = 0; i < bars_.size(); i++) {
     int particle_count = 0;
     for (size_t j = 0; j < particles_speeds_.size(); j++) {
-      if (particles_speeds_[i] >= min_speed_ && particles_speeds_[i] < min_speed_ + speed_range) {
+      if (particles_speeds_[j] >= min_speed_ && particles_speeds_[j] < min_speed_ + speed_range) {
         particle_count++;
       }
     }
@@ -50,7 +50,7 @@ void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
 
   //Should draw the graph here
   for (size_t i = 0; i < bars_.size(); i++) {
-    int height = bottom_wall_ - bars_[i] * 2;
+    double height = bottom_wall_ - bars_[i] * 7;
     ci::gl::color(ci::Color(color_.c_str()));
     ci::gl::drawSolidRect(ci::Rectf(vec2(left_bound, bottom_wall_), vec2(left_bound + bar_range, height)));
     left_bound += bar_range;
