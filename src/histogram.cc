@@ -17,8 +17,12 @@ Histogram::Histogram(const int bottom_wall, const int top_wall,
 
 void Histogram::DrawHistogram(const std::vector<Particle> &particles) {
 
+  DrawTitle();
+  DrawXTitle();
+  DrawYTitle();
   DrawXAxis();
   DrawYAxis();
+
 
   ci::gl::color(ci::Color(color_.c_str()));
   ci::gl::drawStrokedRect(
@@ -75,6 +79,34 @@ void Histogram::DrawYAxis() {
     lower_bound -= amount_;
     speed_label += increment;
   }
+}
+
+void Histogram::DrawTitle() {
+  ci::gl::color(ci::Color("white"));
+  ci::gl::drawStringCentered("Speeds of " + color_ + " particles",
+                             glm::vec2
+                                 ((right_wall_ + left_wall_) / 2, top_wall_ - 20),
+                             ci::Color("white"),
+                             ci::Font("Times New Roman", 20));
+
+}
+
+void Histogram::DrawYTitle() {
+  ci::gl::color(ci::Color("white"));
+  ci::gl::drawStringCentered("Number of\nparticles",
+                             glm::vec2
+                                 (left_wall_ - 50, (top_wall_ + bottom_wall_) / 2),
+                             ci::Color("white"),
+                             ci::Font("Times New Roman", 15));
+
+}
+void Histogram::DrawXTitle() {
+  ci::gl::color(ci::Color("white"));
+  ci::gl::drawStringCentered("Speeds",
+                             glm::vec2
+                                 ((right_wall_ + left_wall_) / 2, bottom_wall_ + 20),
+                             ci::Color("white"),
+                             ci::Font("Times New Roman", 15));
 }
 
 void Histogram::CountParticlesInEachBar() {

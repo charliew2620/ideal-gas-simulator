@@ -62,6 +62,21 @@ class Histogram {
    * Draws the Y axis.
    */
   void DrawYAxis();
+
+  /**
+   * Draws the title.
+   */
+   void DrawTitle();
+
+  /**
+  * Draws the Y-axis title.
+  */
+  void DrawYTitle();
+
+  /**
+   * Draws the X-axis title.
+   */
+  void DrawXTitle();
 };
 
 }
