@@ -34,8 +34,8 @@ class GasContainer {
    * @param number of particles to populate container.
    * @param radius set to particle.
    */
-  void PopulateContainer(const std::string& color, size_t number,
-                         double radius, double mass);
+  void PopulateContainer(const std::string& color, size_t number, double radius,
+                         double mass);
 
   // GetParticles not const bc needed to adjust particle lists for testing
   std::vector<Particle>& GetParticles();

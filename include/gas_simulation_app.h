@@ -59,9 +59,6 @@ class IdealGasApp : public ci::app::App {
   Histogram small_histogram_;
   Histogram normal_histogram_;
   Histogram big_histogram_;
-
-
-
 };
 
 }  // namespace idealgas

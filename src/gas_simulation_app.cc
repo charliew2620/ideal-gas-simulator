@@ -8,21 +8,24 @@ IdealGasApp::IdealGasApp()
     : container_(GasContainer(kWindowSize - kMargin, kMargin, kWindowSize / 3,
                               kWindowSize - kMargin)),
       small_histogram_(Histogram(kWindowSize - 700, kWindowSize - 825, kMargin,
-                       250, kSmallParticleColor, kSmallParticleNumber)),
+                                 250, kSmallParticleColor,
+                                 kSmallParticleNumber)),
       normal_histogram_(Histogram(kWindowSize - 500, kWindowSize - 625, kMargin,
                                   250, kNormalParticleColor, kNormalNumber)),
       big_histogram_(Histogram(kWindowSize - 300, kWindowSize - 425, kMargin,
-                               250, kBigParticleColor, kBigParticleNumber))
-{
+                               250, kBigParticleColor, kBigParticleNumber)) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 
 void IdealGasApp::setup() {
   // add the large and small particles here probably
   // either add as parameters or call method again?
-  container_.PopulateContainer(kNormalParticleColor, kNormalNumber, kNormalRadius, kNormalParticleMass);
-  container_.PopulateContainer(kSmallParticleColor, kSmallParticleNumber, kSmallParticleRadius, kSmallParticleMass);
-  container_.PopulateContainer(kBigParticleColor, kBigParticleNumber, kBigParticleRadius, kBigParticleMass);
+  container_.PopulateContainer(kNormalParticleColor, kNormalNumber,
+                               kNormalRadius, kNormalParticleMass);
+  container_.PopulateContainer(kSmallParticleColor, kSmallParticleNumber,
+                               kSmallParticleRadius, kSmallParticleMass);
+  container_.PopulateContainer(kBigParticleColor, kBigParticleNumber,
+                               kBigParticleRadius, kBigParticleMass);
 }
 
 void IdealGasApp::draw() {
@@ -31,8 +34,10 @@ void IdealGasApp::draw() {
 
   container_.Display();
 
-  small_histogram_.DrawHistogram(container_.GetParticlesByMass(kSmallParticleMass));
-  normal_histogram_.DrawHistogram(container_.GetParticlesByMass(kNormalParticleMass));
+  small_histogram_.DrawHistogram(
+      container_.GetParticlesByMass(kSmallParticleMass));
+  normal_histogram_.DrawHistogram(
+      container_.GetParticlesByMass(kNormalParticleMass));
   big_histogram_.DrawHistogram(container_.GetParticlesByMass(kBigParticleMass));
 }
 

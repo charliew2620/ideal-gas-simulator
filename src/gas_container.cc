@@ -43,7 +43,8 @@ void GasContainer::PopulateContainer(const std::string& color, size_t amount,
                                      double radius, double mass) {
   for (size_t particle = 0; particle < amount; particle++) {
     particles_.emplace_back(GiveRandomPosition(radius),
-                            glm::vec2(GiveRandomVelocity()), color, radius, mass);
+                            glm::vec2(GiveRandomVelocity()), color, radius,
+                            mass);
   }
 }
 
@@ -101,7 +102,8 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
   }
 }
 
-void GasContainer::HandleParticleCollision(Particle& particle, Particle& other) {
+void GasContainer::HandleParticleCollision(Particle& particle,
+                                           Particle& other) {
   // Uses double for loop to check if each particle is in collision distance
   // with another particle and changes their velocities if true
   vec2 particle_velocity = ChangeVelocity(particle, other);
@@ -126,14 +128,15 @@ vec2 GasContainer::ChangeVelocity(Particle& particle, Particle& other) {
   vec2 velocity_difference = particle.GetVelocity() - other.GetVelocity();
   vec2 position_difference = particle.GetPosition() - other.GetPosition();
   float length = glm::length(position_difference);
-  float mass_value = (float) (constant_two_ * other.GetMass() / (particle.GetMass()
-                                                           + other.GetMass()));
-  return particle.GetVelocity() - mass_value
-         * ((glm::dot(velocity_difference, position_difference)) /
-          pow(length, 2) * position_difference);
+  float mass_value = (float)(constant_two_ * other.GetMass() /
+                             (particle.GetMass() + other.GetMass()));
+  return particle.GetVelocity() -
+         mass_value * ((glm::dot(velocity_difference, position_difference)) /
+                       pow(length, 2) * position_difference);
 }
 
-const std::vector<Particle> GasContainer::GetParticlesByMass(double mass) const {
+const std::vector<Particle> GasContainer::GetParticlesByMass(
+    double mass) const {
   std::vector<Particle> particles;
   for (Particle particle : particles_) {
     if (particle.GetMass() == mass) {

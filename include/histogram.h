@@ -1,13 +1,13 @@
 #include <string>
-#include "particle.h"
+
 #include "cinder/gl/gl.h"
+#include "particle.h"
 namespace idealgas {
 /**
  * Histogram that graphs the particles and their speeds. The class updates
  * their speeds every frame and shows them in the simulation.
  */
 class Histogram {
-
  public:
   Histogram(const int bottom_wall, const int top_wall, const int left_wall,
             const int right_wall, const std::string& color, const int amount);
@@ -23,10 +23,10 @@ class Histogram {
    * @param particles passed all of the same mass from gas simulation app class.
    * @return the particles' speeds as a list.
    */
-  const std::vector<double> GetSpeedsOfParticlesList(const std::vector<Particle>& particles) const;
+  const std::vector<double> GetSpeedsOfParticlesList(
+      const std::vector<Particle>& particles) const;
 
  private:
-
   int bottom_wall_;
   int top_wall_;
   int left_wall_;
@@ -66,11 +66,11 @@ class Histogram {
   /**
    * Draws the title.
    */
-   void DrawTitle();
+  void DrawTitle();
 
   /**
-  * Draws the Y-axis title.
-  */
+   * Draws the Y-axis title.
+   */
   void DrawYTitle();
 
   /**
@@ -79,4 +79,4 @@ class Histogram {
   void DrawXTitle();
 };
 
-}
+}  // namespace idealgas
