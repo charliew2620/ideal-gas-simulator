@@ -7,13 +7,15 @@ using glm::vec2;
 
 Histogram::Histogram(const int bottom_wall, const int top_wall,
                      const int left_wall, const int right_wall,
-                     const std::string& color, const int amount) {
+                     const std::string& color, const int amount,
+                     const double mass) {
   bottom_wall_ = bottom_wall;
   top_wall_ = top_wall;
   left_wall_ = left_wall;
   right_wall_ = right_wall;
   color_ = color;
   amount_ = amount;
+  mass_ = mass;
 }
 
 void Histogram::DrawHistogram(const std::vector<Particle>& particles) {
@@ -84,7 +86,8 @@ void Histogram::DrawYAxis() {
 void Histogram::DrawTitle() {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStringCentered(
-      "Speeds of " + color_ + " particles",
+      "Speeds of " + color_ + " particles with mass " +
+          std::to_string((size_t) mass_),
       glm::vec2((right_wall_ + left_wall_) / 2, top_wall_ - 20),
       ci::Color("white"), ci::Font("Times New Roman", 20));
 }

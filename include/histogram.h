@@ -10,7 +10,8 @@ namespace idealgas {
 class Histogram {
  public:
   Histogram(const int bottom_wall, const int top_wall, const int left_wall,
-            const int right_wall, const std::string& color, const int amount);
+            const int right_wall, const std::string& color, const int amount,
+            const double mass);
 
   /**
    * Draws all the components of the histogram.
@@ -33,7 +34,8 @@ class Histogram {
   int right_wall_;
   int amount_;
   std::string color_;
-
+  double mass_;
+  double min_speed_;
   std::vector<double> particles_speeds_;
 
   const static int kNumberOfBars = 10;
@@ -41,7 +43,6 @@ class Histogram {
   constexpr const static double max_speed_ = 10;
   constexpr const static double factor = 5;
   constexpr const static double increment = 5;
-  double min_speed_;
 
   /**
    * Counts the number of particles to be drawn out in each bar

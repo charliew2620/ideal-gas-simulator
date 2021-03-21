@@ -26,6 +26,7 @@ void GasContainer::Display() {
 }
 
 void GasContainer::AdvanceOneFrame() {
+  // Checks for particle collision and updates particles velocities if true
   for (size_t i = 0; i < particles_.size(); i++) {
     for (size_t j = 0; j < particles_.size(); j++) {
       if (CanCollideWithParticle(particles_[i], particles_[j])) {
@@ -65,7 +66,7 @@ vec2 GasContainer::GiveRandomVelocity() {
   double x_velocity =
       (max_velocity_ - min_velocity_) * ((double)rand() / (double)RAND_MAX) +
       min_velocity_;
-
+  // Uses pythagorean theorem equation to set y velocity
   double y_velocity =
       sqrt(pow(max_velocity_, constant_two_) - pow(x_velocity, constant_two_));
 
@@ -104,10 +105,9 @@ void GasContainer::CalculateCollisionWithWall(Particle& particle) const {
 
 void GasContainer::HandleParticleCollision(Particle& particle,
                                            Particle& other) {
-  // Uses double for loop to check if each particle is in collision distance
-  // with another particle and changes their velocities if true
   vec2 particle_velocity = ChangeVelocity(particle, other);
   vec2 other_velocity = ChangeVelocity(other, particle);
+
   particle.SetNewVelocity(particle_velocity);
   other.SetNewVelocity(other_velocity);
 }

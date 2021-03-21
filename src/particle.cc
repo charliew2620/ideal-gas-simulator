@@ -1,9 +1,6 @@
 #include <gas_container.h>
 #include <particle.h>
 
-//to do: adjustments from week 1, histogram, adjust tests for week2,
-//if time: speed up(use multiplier?), or json(find library), or equation overlay: v=root(2rt/m)?
-
 namespace idealgas {
 
 Particle::Particle(const vec2& position, const vec2& velocity,
@@ -52,7 +49,6 @@ const double& Particle::GetRadius() const {
   return radius_;
 }
 
-// week 2
 const double& Particle::GetMass() const {
   return mass_;
 }
