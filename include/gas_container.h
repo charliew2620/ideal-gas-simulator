@@ -37,9 +37,10 @@ class GasContainer {
   void PopulateContainer(const std::string& color, size_t number,
                          double radius, double mass);
 
+  // GetParticles not const bc needed to adjust particle lists for testing
   std::vector<Particle>& GetParticles();
   const double& GetMaxMagnitudeVelocity() const;
-  std::vector<Particle> GetParticlesByMass(double mass);
+  const std::vector<Particle> GetParticlesByMass(double mass) const;
 
  private:
   int bottom_wall_;

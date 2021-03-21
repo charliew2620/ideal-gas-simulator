@@ -7,7 +7,6 @@
 namespace idealgas {
 
 class Particle {
-  // add mass to particle constructor
  public:
   /**
    * Particle constructor with given characteristics.
@@ -50,7 +49,6 @@ class Particle {
   const glm::vec2& GetVelocity() const;
   const std::string& GetColor() const;
   const double& GetRadius() const;
-  // week2
   const double& GetMass() const;
   const double GetSpeed() const;
 
@@ -59,7 +57,6 @@ class Particle {
   glm::vec2 velocity_;
   std::string color_;
   double radius_;
-  // week 2
   double mass_;
 };
 }  // namespace idealgas

@@ -46,4 +46,14 @@ TEST_CASE("Testing velocity methods for particle") {
     particle.SetNewVelocity(vec2(-0.5, 2));
     REQUIRE(particle.GetVelocity() == vec2(-0.5, 2));
   }
+
+  SECTION("Testing speed of particle") {
+    REQUIRE(particle.GetSpeed() == glm::length(particle.GetVelocity()));
+  }
+
+  SECTION("Testing mass of particle") {
+    REQUIRE(particle.GetMass() == 10);
+  }
+
+
 }
