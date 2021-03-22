@@ -39,14 +39,19 @@ void IdealGasApp::draw() {
 
   container_.Display();
 
-  small_histogram_.DrawHistogram(
-      container_.GetParticlesByMass(kSmallParticleMass));
-  normal_histogram_.DrawHistogram(
-      container_.GetParticlesByMass(kNormalParticleMass));
-  big_histogram_.DrawHistogram(container_.GetParticlesByMass(kBigParticleMass));
+  small_histogram_.DrawHistogram();
+  normal_histogram_.DrawHistogram();
+  big_histogram_.DrawHistogram();
 }
 
 void IdealGasApp::update() {
   container_.AdvanceOneFrame();
+
+  small_histogram_.UpdateHistogram(
+      container_.GetParticlesByMass(kSmallParticleMass));
+  normal_histogram_.UpdateHistogram(
+      container_.GetParticlesByMass(kNormalParticleMass));
+  big_histogram_.UpdateHistogram(
+      container_.GetParticlesByMass(kBigParticleMass));
 }
 }  // namespace idealgas

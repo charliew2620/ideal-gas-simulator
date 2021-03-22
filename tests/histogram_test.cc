@@ -7,24 +7,27 @@
 using namespace::idealgas;
 
 TEST_CASE("Tests if particles are correctly in each bin") {
-  GasContainer container = idealgas::GasContainer(692, 108, 108, 692);
-  Histogram histogram = Histogram(200, 75, 90, 250, "white", 10, 10);
-  container.PopulateContainer("white", 10, 8, 10);
-  container.PopulateContainer("white", 15, 8, 20);
 
-  std::vector<double> particles_speeds;
-  std::vector<idealgas::Particle> particles;
+  std::vector<Particle> particles;
 
-  particles_speeds.push_back(0.5);
-  particles_speeds.push_back(0.5);
-  particles_speeds.push_back(0.5);
-  particles_speeds.push_back(0.5);
+  for (size_t i = 0; i < 3; i++) {
+    particles.emplace_back(Particle(vec2(650, 650),
+                                    vec2(0.5), "white", 8, 12));
+  }
 
-  particles_speeds.push_back(1.5);
-  particles_speeds.push_back(1.5);
+  for (size_t i = 0; i < 5; i++) {
+    particles.emplace_back(Particle(vec2(650, 650),
+                                    vec2(1), "white", 8, 12));
+  }
 
-  particles_speeds.push_back(5.5);
-  particles_speeds.push_back(5.5);
+  for (size_t i = 0; i < 7; i++) {
+    particles.emplace_back(Particle(vec2(650, 650),
+                                    vec2(5), "white", 8, 12));
+  }
+
+  Histogram white_histogram = Histogram(200, 75, 90, 250, "white", 15, 12);
+  white_histogram.UpdateHistogram(particles);
+  REQUIRE(white_histogram.GetBarsList()[0] == 3);
 }
 
 TEST_CASE("Tests GetSpeedsOfParticlesList getter") {

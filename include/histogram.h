@@ -15,9 +15,14 @@ class Histogram {
 
   /**
    * Draws all the components of the histogram.
-   * @param particles passed all of the same mass from gas simulation app class.
    */
-  void DrawHistogram(const std::vector<Particle>& particles);
+  void DrawHistogram();
+
+  /**
+   * Updates the the number of particles in each bar based on passed list.
+   * @param particles with their current speeds.
+   */
+  void UpdateHistogram(const std::vector<Particle>& particles);
 
   /**
    * Gets the speed of every particle passed in the list.
@@ -44,6 +49,7 @@ class Histogram {
   constexpr const static double max_speed_ = 10;
   constexpr const static double factor = 5;
   constexpr const static double increment = 5;
+
 
   /**
    * Counts the number of particles to be drawn out in each bar

@@ -18,7 +18,7 @@ Histogram::Histogram(const int bottom_wall, const int top_wall,
   mass_ = mass;
 }
 
-void Histogram::DrawHistogram(const std::vector<Particle>& particles) {
+void Histogram::DrawHistogram() {
   DrawTitle();
   DrawXTitle();
   DrawYTitle();
@@ -29,10 +29,12 @@ void Histogram::DrawHistogram(const std::vector<Particle>& particles) {
   ci::gl::drawStrokedRect(
       ci::Rectf(vec2(left_wall_, top_wall_), vec2(right_wall_, bottom_wall_)));
 
-  particles_speeds_ = GetSpeedsOfParticlesList(particles);
-
-  CountParticlesInEachBar();
   DrawBars();
+}
+
+void Histogram::UpdateHistogram(const std::vector<Particle>& particles) {
+  particles_speeds_ = GetSpeedsOfParticlesList(particles);
+  CountParticlesInEachBar();
 }
 
 void Histogram::DrawXAxis() {
@@ -75,7 +77,7 @@ void Histogram::DrawTitle() {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStringCentered(
       "Speeds of " + color_ + " particles with mass " +
-          std::to_string((size_t) mass_),
+          std::to_string((size_t)mass_),
       glm::vec2((right_wall_ + left_wall_) / 2, top_wall_ - 20),
       ci::Color("white"), ci::Font("Times New Roman", 20));
 }
