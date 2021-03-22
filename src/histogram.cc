@@ -108,7 +108,7 @@ void Histogram::DrawXTitle() {
 
 void Histogram::CountParticlesInEachBar() {
   double speed_range = max_speed_ / kNumberOfBars;
-  min_speed_ = *min_element(particles_speeds_.begin(), particles_speeds_.end());
+  min_speed_ = 0;
 
   // Counts number of particles in speed range and adds the count to the bars_
   // list
