@@ -27,6 +27,8 @@ class Histogram {
   const std::vector<double> GetSpeedsOfParticlesList(
       const std::vector<Particle>& particles) const;
 
+  const std::vector<int> GetBarsList() const;
+
  private:
   int bottom_wall_;
   int top_wall_;
@@ -35,7 +37,6 @@ class Histogram {
   int amount_;
   std::string color_;
   double mass_;
-  double min_speed_;
   std::vector<double> particles_speeds_;
 
   const static int kNumberOfBars = 10;

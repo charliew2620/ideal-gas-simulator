@@ -41,7 +41,7 @@ TEST_CASE("Tests the spawning of particles inside container") {
     container.PopulateContainer("green", 15, 10, 10);
     container.PopulateContainer("blue", 25, 15, 20);
 
-    //Tests the properties of the new sorted particle list
+    // Tests the properties of the new sorted particle list
     REQUIRE(container.GetParticlesByMass(20).size() == 25);
     for (idealgas::Particle particle : container.GetParticlesByMass(20)) {
       REQUIRE(particle.GetColor() == "blue");
@@ -247,8 +247,8 @@ TEST_CASE("Tests particle collision") {
                                           "red", 10, 10);
     container.GetParticles().emplace_back(vec2(500, 500), vec2(1.5, 1.5), "red",
                                           10, 10);
-    container.GetParticles().emplace_back(vec2(490, 490), vec2(2, 2), "red",
-                                          10, 10);
+    container.GetParticles().emplace_back(vec2(490, 490), vec2(2, 2), "red", 10,
+                                          10);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(1.5, 1.5));
@@ -260,7 +260,9 @@ TEST_CASE("Tests particle collision") {
     REQUIRE(container.GetParticles().at(2).GetPosition() == vec2(488.5, 488.5));
   }
 
-  SECTION("Tests valid collision with two particles of different masses") {
+  SECTION(
+      "Tests valid collision with two particles of different masses with both "
+      "X and Y components") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 500), vec2(-1.5, 1.5),
                                           "red", 10, 10);
@@ -275,12 +277,33 @@ TEST_CASE("Tests particle collision") {
     REQUIRE(container.GetParticles().at(1).GetPosition() == vec2(499.5, 510.5));
   }
 
+  SECTION(
+      "Tests valid collision with three particles of different masses with "
+      "both X and Y components") {
+    container.GetParticles().clear();
+    container.GetParticles().emplace_back(vec2(510, 510), vec2(-1.5, -1.5),
+                                          "white", 10, 10);
+    container.GetParticles().emplace_back(vec2(500, 500), vec2(1.5, 1.5), "red",
+                                          10, 20);
+    container.GetParticles().emplace_back(vec2(490, 490), vec2(2, 2), "blue",
+                                          10, 30);
+    container.AdvanceOneFrame();
+    // Checks new velocity
+    REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(2.5, 2.5));
+    REQUIRE(container.GetParticles().at(1).GetVelocity() == vec2(2.5, 2.5));
+    REQUIRE(container.GetParticles().at(2).GetVelocity() == vec2(0, 0));
+    // Checks new position
+    REQUIRE(container.GetParticles().at(0).GetPosition() == vec2(512.5, 512.5));
+    REQUIRE(container.GetParticles().at(1).GetPosition() == vec2(502.5, 502.5));
+    REQUIRE(container.GetParticles().at(2).GetPosition() == vec2(490, 490));
+  }
+
   SECTION("Tests valid particle collision with a still particle") {
     container.GetParticles().clear();
     container.GetParticles().emplace_back(vec2(510, 500), vec2(-1.5, 1.5),
                                           "red", 10, 10);
-    container.GetParticles().emplace_back(vec2(500, 510), vec2(0, 0),
-                                          "red", 10, 20);
+    container.GetParticles().emplace_back(vec2(500, 510), vec2(0, 0), "red", 10,
+                                          20);
     container.AdvanceOneFrame();
     // Checks new velocity
     REQUIRE(container.GetParticles().at(0).GetVelocity() == vec2(0.5, -0.5));
@@ -303,8 +326,9 @@ TEST_CASE(
 
   for (idealgas::Particle particle : container.GetParticles()) {
     // Uses KE equation 0.5mv^2
-    initial_energy_sum += 0.5 * particle.GetMass() * sqrt(pow(particle.GetVelocity().x, 2) +
-                                     pow(particle.GetVelocity().y, 2));
+    initial_energy_sum += 0.5 * particle.GetMass() *
+                          sqrt(pow(particle.GetVelocity().x, 2) +
+                               pow(particle.GetVelocity().y, 2));
   }
   // Lets particles move around in container for chosen number of frames
   for (int i = 0; i < 20; i++) {
@@ -313,8 +337,9 @@ TEST_CASE(
 
   for (idealgas::Particle particle : container.GetParticles()) {
     // Uses KE equation 0.5mv^2
-    final_energy_sum += 0.5 * particle.GetMass() * sqrt(pow(particle.GetVelocity().x, 2) +
-                                   pow(particle.GetVelocity().y, 2));
+    final_energy_sum += 0.5 * particle.GetMass() *
+                        sqrt(pow(particle.GetVelocity().x, 2) +
+                             pow(particle.GetVelocity().y, 2));
   }
   // https://stackoverflow.com/questions/6718343/how-to-use-floating-point-tolerances-in-the-catch-framework
   REQUIRE(initial_energy_sum == Approx(final_energy_sum).epsilon(1));

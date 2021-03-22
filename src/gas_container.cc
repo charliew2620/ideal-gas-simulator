@@ -72,8 +72,8 @@ vec2 GasContainer::GiveRandomVelocity() {
 
   // https://stackoverflow.com/questions/33060893/whats-a-simple-way-to-generate-a-random-bool-in-c
   // Randomizes making y velocity negative
-  // If rand_bool is true, negates the y velocity, or leaves it as is if false
   bool rand_bool = rand() & 1;
+  // If rand_bool is true, negates the y velocity, or leaves it as is if false
   if (rand_bool) {
     y_velocity = -y_velocity;
   }

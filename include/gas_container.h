@@ -48,7 +48,6 @@ class GasContainer {
   int left_wall_;
   int right_wall_;
 
-  // Max and min velocities should be the same value in magnitude for same mass
   const double max_velocity_ = 2;
   const double min_velocity_ = -2;
 

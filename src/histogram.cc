@@ -35,18 +35,6 @@ void Histogram::DrawHistogram(const std::vector<Particle>& particles) {
   DrawBars();
 }
 
-const std::vector<double> Histogram::GetSpeedsOfParticlesList(
-    const std::vector<Particle>& particles) const {
-  std::vector<double> particles_speeds;
-
-  if (particles.size() > 0) {
-    for (Particle particle : particles) {
-      particles_speeds.push_back(particle.GetSpeed());
-    }
-  }
-  return particles_speeds;
-}
-
 void Histogram::DrawXAxis() {
   double speed_label = 0;
   double left_bound = left_wall_;
@@ -108,7 +96,7 @@ void Histogram::DrawXTitle() {
 
 void Histogram::CountParticlesInEachBar() {
   double speed_range = max_speed_ / kNumberOfBars;
-  min_speed_ = 0;
+  double min_speed = 0;
 
   // Counts number of particles in speed range and adds the count to the bars_
   // list
@@ -116,13 +104,13 @@ void Histogram::CountParticlesInEachBar() {
     int particle_count = 0;
     for (size_t particle_speed = 0; particle_speed < particles_speeds_.size();
          particle_speed++) {
-      if (particles_speeds_[particle_speed] >= min_speed_ &&
-          particles_speeds_[particle_speed] < min_speed_ + speed_range) {
+      if (particles_speeds_[particle_speed] >= min_speed &&
+          particles_speeds_[particle_speed] < min_speed + speed_range) {
         particle_count++;
       }
     }
     bars_[bar] = particle_count;
-    min_speed_ += speed_range;
+    min_speed += speed_range;
   }
 }
 
@@ -141,5 +129,21 @@ void Histogram::DrawBars() {
                                     vec2(left_bound + bar_range, height)));
     left_bound += bar_range;
   }
+}
+
+const std::vector<double> Histogram::GetSpeedsOfParticlesList(
+    const std::vector<Particle>& particles) const {
+  std::vector<double> particles_speeds;
+
+  if (particles.size() > 0) {
+    for (Particle particle : particles) {
+      particles_speeds.push_back(particle.GetSpeed());
+    }
+  }
+  return particles_speeds;
+}
+
+const std::vector<int> Histogram::GetBarsList() const {
+  return bars_;
 }
 }  // namespace idealgas
