@@ -50,7 +50,6 @@ class Histogram {
   constexpr const static double factor = 5;
   constexpr const static double increment = 5;
 
-
   /**
    * Counts the number of particles to be drawn out in each bar
    */
