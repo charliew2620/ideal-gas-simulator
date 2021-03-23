@@ -89,6 +89,7 @@ void Histogram::DrawYTitle() {
       glm::vec2(left_wall_ - 50, (top_wall_ + bottom_wall_) / 2),
       ci::Color("white"), ci::Font("Times New Roman", 15));
 }
+
 void Histogram::DrawXTitle() {
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStringCentered(

@@ -149,6 +149,7 @@ const std::vector<Particle> GasContainer::GetParticlesByMass(
 std::vector<Particle>& GasContainer::GetParticles() {
   return particles_;
 }
+
 const double& GasContainer::GetMaxMagnitudeVelocity() const {
   return max_velocity_;
 }
